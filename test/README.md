@@ -1,1 +1,1 @@
-테스트 디렉토리�
+test directory
