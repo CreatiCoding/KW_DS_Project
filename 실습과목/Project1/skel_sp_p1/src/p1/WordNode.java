@@ -10,7 +10,7 @@ public class WordNode {
 
 	WordNode()
 	{
-		
+		this.wordmean = new Pair<String, String>(); 
 	}
 
 	WordNode(Pair<String, String> wordmean, WordNode pLeft, WordNode pRight, WordNode pNext) {
