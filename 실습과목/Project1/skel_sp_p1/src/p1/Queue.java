@@ -1,5 +1,6 @@
 package p1;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -71,19 +72,52 @@ public class Queue {
 	{
 		WordNode tmp= pHead; 
 		
-		while(tmp.GetNext()!=null)
+		if(pHead==null)
 		{
-			System.out.printf(tmp.GetWord(), " ");
-			System.out.println(tmp.GetMean());
-			tmp=tmp.GetNext();
+			System.out.println("No Word in the wordlist");
+			return false; 
+		}
+		else {
+			while(tmp.GetNext()!=null)
+			{
+				System.out.printf(tmp.GetWord(), " ");
+				System.out.println(tmp.GetMean());
+				tmp=tmp.GetNext();
+			}
+			return true;
 		}
 		
-		return true;
 	}
 	// SAVE
 	public boolean Save() throws IOException
 	{
-		return true;
+		WordNode tmp= pHead; 
+		File file = new File("word.txt");
+		
+		if(!file.exists())
+		{
+			file.createNewFile();
+		}
+		
+		if(pHead==null)
+		{
+			System.out.println("no words to save");
+			return false; 
+		}
+		else
+		{
+			FileWriter fw= new FileWriter(file,true);
+			BufferedWriter bw=new BufferedWriter(fw);
+			
+			while(tmp.GetNext()!=null)
+			{
+				bw.write(tmp.GetWord());
+				bw.write(tmp.GetMean());
+				tmp=tmp.GetNext();
+			}
+			
+			return true;
+		}
 	}
 	public static void main(String[] args) throws IOException {
 		
