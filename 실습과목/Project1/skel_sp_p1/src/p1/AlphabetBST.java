@@ -27,16 +27,74 @@ public class AlphabetBST {
 		
 	public void Insert(AlphabetNode node)
 	{
-		
+		if(root == null)
+		{
+			root = node; 
+		}
+		else 
+		{
+			AlphabetNode tmp= root;
+			
+			while(true)
+			{
+				if(tmp.GetAlphabet()>node.GetAlphabet())
+				{
+					if(tmp.GetLeft()!=null)
+						tmp=tmp.GetLeft();
+					else
+						{
+							tmp.SetLeft(node);
+							break;
+						}
+				}
+				else if(tmp.GetAlphabet()<node.GetAlphabet())
+				{
+					if(tmp.GetRight()!=null)
+						tmp=tmp.GetRight();
+					else
+					{
+						tmp.SetRight(node);
+						break;
+					}
+				}
+				else
+				{
+					return; 
+				}
+			}
+		}
 	}
 	
 	public boolean Print() throws IOException
 	{
-		
+		Preorder(root);
+		return true; 
 	}
 	
 	public AlphabetNode Search(char alpabet)
 	{
+		AlphabetNode tmp=root; 
+		while(true)
+		{
+			if(tmp.GetAlphabet()>alpabet)
+			{
+				if(tmp.GetLeft()!=null)
+				{
+					tmp=tmp.GetLeft();
+					if(tmp.GetAlphabet()==alpabet)
+						return tmp; 
+				}
+			}
+			else if (tmp.GetAlphabet()<alpabet)
+			{
+				if(tmp.GetRight()!=null)
+				{
+					tmp=tmp.GetRight();
+					if(tmp.GetAlphabet()==alpabet)
+						return tmp; 
+				}
+			}
+		}
 		
 	}
 	
@@ -47,15 +105,20 @@ public class AlphabetBST {
 
 	public void	Preorder(AlphabetNode node) throws IOException
 	{
+		if(root==null)
+			return; 
 		
+		System.out.println(node.GetAlphabet());
+		Preorder(node.GetLeft());
+		Preorder(node.GetRight());	
 	}
 
 	public int getCnt()
 	{
-		
+		return this.WordCnt;
 	}
 	public void setCnt(int cnt)
 	{
-
+		this.setCnt(cnt);
 	}
 }
