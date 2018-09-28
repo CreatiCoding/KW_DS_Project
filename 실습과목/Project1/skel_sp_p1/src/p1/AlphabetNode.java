@@ -5,7 +5,7 @@ public class AlphabetNode {
 	private WordBST bst;
 	private AlphabetNode pLeft;		// BST Left Pointer
 	private AlphabetNode pRight;	// BST Right Pointer
-
+	
 	AlphabetNode()
 	{
 		this('\0');
