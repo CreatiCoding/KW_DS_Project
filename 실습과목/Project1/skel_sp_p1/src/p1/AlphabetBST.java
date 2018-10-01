@@ -3,6 +3,7 @@ package p1;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,14 +16,22 @@ public class AlphabetBST {
 		root = null;
 		WordCnt = 0;
 
-		
 		char[] alpha = { 'P', 'H', 'X', 'D', 'L', 'T', 'Z', 'B', 'F', 'J', 'N', 'R', 'V', 'Y', 'A', 'C', 'E', 'G', 'I',
 				'K', 'M', 'O', 'Q', 'S', 'U', 'W' };
 
 		for (int i = 0; i < 26; i++) {
-			Insert(new AlphabetNode(alpha[i]));
+			this.Insert(new AlphabetNode(alpha[i]));
 		}
-		
+
+	}
+
+	public void InsertWord(WordNode node) {
+		AlphabetNode target = this.Search(node.GetWord().toUpperCase().charAt(0));
+		if (target.GetBST() == null) {
+			target.SetBST(new WordBST());
+		}
+		target.GetBST().Insert(node);
+		this.WordCnt++;
 	}
 
 	public void Insert(AlphabetNode node) {
@@ -56,13 +65,13 @@ public class AlphabetBST {
 		Preorder(root);
 		return true;
 	}
-	
+
 	public AlphabetNode Search(char alpabet) {
 		AlphabetNode tmp = root;
 		while (tmp != null) {
-			if (tmp.GetAlphabet() == alpabet ) {
+			if (tmp.GetAlphabet() == alpabet) {
 				return tmp;
-			}else if (tmp.GetAlphabet() > alpabet) {
+			} else if (tmp.GetAlphabet() > alpabet) {
 				tmp = tmp.GetLeft();
 			} else if (tmp.GetAlphabet() < alpabet) {
 				tmp = tmp.GetRight();
@@ -70,21 +79,53 @@ public class AlphabetBST {
 		}
 		return tmp;
 	}
+
+	public String toString() {
+		return this.toString(root);
+	}
+
+	public String toString(AlphabetNode node) {
+		String result = "";
+
+		if (node == null) {
+			return "";
+		} else {
+			result += toString(node.GetLeft());
+			result += (node.toString() + "\n");
+			if (node.GetBST() != null)
+				result += (node.GetBST().toString());
+			System.out.println(node.GetAlphabet());
+			result += toString(node.GetRight());
+
+			return result;
+		}
+	}
+
 	/**
-	 * TODO
-	 * WordBST¸¦ ÀúÀåÇÏ´Â ¹æ½ÄÀ» »ç¿ëÇØ¾ßÇÔ
+	 * TODO WordBSTï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½
+	 * 
 	 * @return
 	 * @throws IOException
 	 */
 	public boolean Save() throws IOException {
-		return false;
+		BufferedOutputStream bos;
+
+		// ì“¸ ë¬¸ìžì—´ = ì´ì „ ë‚´ìš© + ìž‘ì„±í•œ ë‚´ìš©
+		String contents = this.toString(root);
+
+		// íŒŒì¼ ì“°ê¸°
+		bos = new BufferedOutputStream(new FileOutputStream("memorizing_word.txt"));
+		bos.write(contents.getBytes("utf-8"));
+		bos.close();
+
+		return true;
 	}
 
 	public void Preorder(AlphabetNode node) throws IOException {
 		if (node == null)
 			return;
-		System.out.println(node.GetAlphabet());
 		Preorder(node.GetLeft());
+		System.out.println(node.GetAlphabet());
 		Preorder(node.GetRight());
 	}
 
@@ -98,9 +139,14 @@ public class AlphabetBST {
 
 	public static void main(String[] args) throws IOException {
 
-		System.out.println("start test!");
 		AlphabetBST test = new AlphabetBST();
-		test.Print();
-
+		test.InsertWord(new WordNode("cat", "ê³ ì–‘ì´"));
+		test.InsertWord(new WordNode("banana", "ë°”ë‚˜ë‚˜"));
+		test.InsertWord(new WordNode("apple", "ì‚¬ê³¼"));
+		test.InsertWord(new WordNode("air", "ê³µê¸°"));
+		test.InsertWord(new WordNode("ant", "ê°œë¯¸"));
+		test.InsertWord(new WordNode("doctor", "ì˜ì‚¬"));
+		test.InsertWord(new WordNode("eagle", "ë…ìˆ˜ë¦¬"));
+		test.Save();
 	}
 }

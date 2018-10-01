@@ -1,6 +1,11 @@
 package p1;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -9,129 +14,113 @@ import p1.WordNode;
 public class Queue {
 
 	public WordNode pHead;
-	
-	Queue()
-	{
-	
+
+	Queue() {
+
 	}
-	
-	
+
 	// LOAD, ADD
-	public void Push(WordNode node){
-		if(pHead==null)
-			pHead=node; 
-		else
-		{
-			WordNode tmp;
-			tmp=pHead;
+	public void Push(WordNode node) {
+		if (pHead == null)
+			pHead = node;
+		else {
+			WordNode tmp = pHead;
+
+			while (tmp.GetNext() != null)
+				tmp = tmp.GetNext();
 			
-			while(tmp.GetNext()!=null)
-				tmp=tmp.GetNext();
-			
-			tmp=node; 
+			tmp.SetNext(node);
 		}
 	}
-	
+
 	// MOVE
-	public WordNode	Pop()
-	{
+	public WordNode Pop() {
 		WordNode tmp;
-		tmp= pHead;
-		pHead=tmp.GetNext();
-		
-		return pHead; 
+		tmp = pHead;
+		pHead = tmp.GetNext();
+
+		return pHead;
 	}
-		
+
 	// SEARCH, UPDATE
-	public WordNode Search(String word)
-	{
+	public WordNode Search(String word) {
 		WordNode tmp;
-		tmp=pHead;
-	
-		if(pHead.GetWord()==word)
-		{
+		tmp = pHead;
+
+		if (pHead.GetWord() == word) {
 			return pHead;
 		}
-		
-		else 
-		{
-			while(tmp.GetNext()!=null)
-			{
-				if(tmp.GetWord()==word)
+
+		else {
+			while (tmp.GetNext() != null) {
+				if (tmp.GetWord() == word)
 					return tmp;
-				
-				tmp=tmp.GetNext();
+
+				tmp = tmp.GetNext();
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	// PRINT
-	public boolean Print() throws IOException
-	{
-		WordNode tmp= pHead; 
-		
-		if(pHead==null)
-		{
+	public boolean Print() throws IOException {
+		WordNode tmp = pHead;
+
+		if (pHead == null) {
 			System.out.println("No Word in the wordlist");
-			return false; 
-		}
-		else {
-			while(tmp.GetNext()!=null)
-			{
+			return false;
+		} else {
+
+			System.out.printf(tmp.GetWord(), " ");
+			System.out.println(tmp.GetMean());
+			while (tmp.GetNext() != null) {
 				System.out.printf(tmp.GetWord(), " ");
 				System.out.println(tmp.GetMean());
-				tmp=tmp.GetNext();
+				tmp = tmp.GetNext();
 			}
+
 			return true;
 		}
-		
+
 	}
+
+	public String toString(WordNode node) throws IOException {
+		if (node == null)
+			return "";
+		String result = node.toString() + "\n";
+		result = result + this.toString(node.GetNext());
+		return result;
+	}
+
 	// SAVE
-	public boolean Save() throws IOException
-	{
-		WordNode tmp= pHead; 
-		File file = new File("word.txt");
-		
-		if(!file.exists())
-		{
-			file.createNewFile();
-		}
-		
-		if(pHead==null)
-		{
-			System.out.println("no words to save");
-			return false; 
-		}
-		else
-		{
-			FileWriter fw= new FileWriter(file,true);
-			BufferedWriter bw=new BufferedWriter(fw);
-			
-			while(tmp.GetNext()!=null)
-			{
-				bw.write(tmp.GetWord());
-				bw.write(tmp.GetMean());
-				tmp=tmp.GetNext();
-			}
-			
-			return true;
-		}
+	public boolean Save() throws IOException {
+
+		BufferedOutputStream bos;
+
+		// 쓸 문자열 = 이전 내용 + 작성한 내용
+		String contents = this.toString(this.pHead);
+
+		// 파일 쓰기
+		bos = new BufferedOutputStream(new FileOutputStream("to_memorize_word.txt"));
+		bos.write(contents.getBytes("utf-8"));
+		bos.close();
+		return true;
+
 	}
+
 	public static void main(String[] args) throws IOException {
-		
+
 		System.out.println("hello world!");
-		//Manager manager = new Manager();
-		//manager.run("command.txt");
-		
-		Queue test= new Queue();
-		WordNode node = new WordNode();
-		node.SetWord("apple");
-		node.SetMean("���");
-		
-		test.Push(node);
-				
+
+		Queue test = new Queue();
+		test.Push(new WordNode("apple", "사과"));
+		test.Push(new WordNode("banana", "바나"));
+		test.Push(new WordNode("cat", "고양이"));
+		test.Push(new WordNode("doctor", "의사"));
+		test.Push(new WordNode("eagle", "독수리"));
+		test.Print();
+		test.Save();
 	}
 
 }

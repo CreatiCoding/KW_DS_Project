@@ -3,6 +3,7 @@ package p1;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,20 +16,57 @@ public class CircularLinkedList {
 		this.pHead = null;
 	}
 
+	public void Delete(String word) {
+		if (this.pHead == null) {
+			return;
+		} else if (this.pHead.GetNext() == this.pHead) {
+			if (word.equals(this.pHead.GetWord())) {
+				this.pHead = null;
+				return;
+			}
+		} else {
+			WordNode target = this.pHead;
+			WordNode parent = this.pHead.GetNext();
+			
+			// 부모 찾기
+			while((!word.equals(parent.GetNext().GetWord()))&&!(parent.GetNext()==this.pHead)) {
+				parent = parent.GetNext();
+			}
+			// 대상 찾기
+			target = parent.GetNext();
+			
+			if(target == this.pHead) {
+				this.pHead = this.pHead.GetNext();
+			}
+			// 부모의 next는 target의 next 가리킨다.
+			parent.SetNext(target.GetNext());
+			
+			// target은 null을 가리켜 지운다.
+			target = null;
+			
+		}
+		return ;
+	}
+
 	public void Insert(WordNode node) {
 		if (this.pHead == null) {
 			this.pHead = node;
-		} else if (this.pHead.GetNext() == null) {
+			this.pHead.SetNext(node);
+		} else if (this.pHead.GetNext() == this.pHead) {
 			this.pHead.SetNext(node);
 			node.SetNext(this.pHead);
 			this.pHead = node;
 		} else {
 			WordNode temp = this.pHead;
-			while (temp.GetNext() != this.pHead) {
-				temp = temp.GetNext();
+			WordNode parent = this.pHead.GetNext();
+			
+			// 부모 찾기
+			while(parent.GetNext() != temp) {
+				parent = parent.GetNext();
 			}
+			// 부모 next는 새로운 노드를 가리킨다.
+			parent.SetNext(node);
 			node.SetNext(this.pHead);
-			temp.SetNext(node);
 			this.pHead = node;
 		}
 	}
@@ -65,97 +103,50 @@ public class CircularLinkedList {
 	}
 
 	public boolean Print() throws IOException {
-		String resultString = "";
-		if (this.pHead == null) {
-			resultString += ("It is empty.\n");
-		} else if (this.pHead.GetNext() == null) {
-			resultString += ("word: " + this.pHead.GetWord() + ", mean: " + this.pHead.GetMean() + "\n");
-		} else {
-			WordNode temp = this.pHead;
-			while (temp.GetNext() != this.pHead) {
-				resultString += ("word: " + temp.GetWord() + ", mean: " + temp.GetMean() + "\n");
-				temp = temp.GetNext();
-			}
-			resultString += ("word: " + temp.GetWord() + ", mean: " + temp.GetMean() + "\n");
-		}
-		System.out.print(resultString);
+		System.out.print(this.toString());
 		return true;
 	}
 
-	public String toString(String format) {
-		
+	public String toString() {
 		String resultString = "";
 		if (this.pHead == null) {
-			resultString += ("");
-		} else if (this.pHead.GetNext() == null) {
-			resultString += (this.pHead.GetWord() + "\t" + this.pHead.GetMean() + "\n");
+			resultString += ("Empty\n");
+		} else if (this.pHead.GetNext() == this.pHead) {
+			resultString += (this.pHead.toString() + "\n");
 		} else {
 			WordNode temp = this.pHead;
 			while (temp.GetNext() != this.pHead) {
-				resultString += (temp.GetWord() + "\t" + temp.GetMean() + "\n");
+				resultString += (temp.toString() + "\n");
 				temp = temp.GetNext();
 			}
-			resultString += (temp.GetWord() + "\t" + temp.GetMean() + "\n");
+			resultString += (temp.toString() + "\n");
 		}
-		
 		return resultString;
 	}
-	
+
 	public boolean Save() throws IOException {
-		
-		
-		FileOutputStream fos = null;
-		ObjectOutputStream out = null;
-		try {
-			fos = new FileOutputStream("memorized_word.txt");
-			out = new ObjectOutputStream(fos);
-			out.writeObject((Object)this);
-			out.close();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			System.out.println("에러가 발생하였습니다.");
-			return false;
-		}
+		BufferedOutputStream bos;
+		// 쓸 문자열 = 이전 내용 + 작성한 내용
+		// 파일 쓰기
+		bos = new BufferedOutputStream(new FileOutputStream("memorized_word.txt"));
+		bos.write(this.toString().getBytes("utf-8"));
+		bos.close();
 		return true;
 	}
 
 	public static void main(String[] args) throws IOException {
 
-		System.out.println("hello world!");
-		// Manager manager = new Manager();
-		// manager.run("command.txt");
-
-		System.out.println("\n[create list]");
 		CircularLinkedList test = new CircularLinkedList();
 		test.Print();
 
-		System.out.println("\n[insert apple]");
-		WordNode node = new WordNode();
-		node.SetWord("apple");
-		node.SetMean("사과");
-		test.Insert(node);
-		test.Print();
-
-		System.out.println("\n[insert banana]");
-		node = new WordNode();
-		node.SetWord("banana");
-		node.SetMean("바나나");
-		test.Insert(node);
-		test.Print();
-
-		System.out.println("\n[insert cat]");
-		node = new WordNode();
-		node.SetWord("cat");
-		node.SetMean("고양이");
-		test.Insert(node);
-		test.Print();
-
-		System.out.println("\n[search banana]");
-		node = test.Search("apple");
-		System.out.println("word: " + node.GetWord() + ", mean: " + node.GetMean());
-		test.Print();
+		test.Insert(new WordNode("apple", "사과"));
+		test.Insert(new WordNode("banana", "바나나"));
+		test.Insert(new WordNode("cat", "고양이"));
+		test.Insert(new WordNode("doctor", "의사"));
+		test.Insert(new WordNode("eagle", "독수리"));
 		
+		test.Print();
 		test.Save();
-		
+
 	}
 }

@@ -1,6 +1,10 @@
 package p1;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -8,9 +12,6 @@ public class WordBST {
 
 	public WordNode root; // Word BST Root
 
-	public WordNode getRoot() {
-		return this.root;
-	}
 	public WordBST() {
 		root = null;
 	}
@@ -19,92 +20,81 @@ public class WordBST {
 		if (root == null) {
 			root = node;
 		} else {
-			
-			WordNode tmp = root;
+			WordNode target = root;
 
-			WordNode target = root, parent = null;
-			
-			while(target!=null && !target.GetWord().equals(word)) {
-				parent = target;
-				target = (target.GetWord().compareTo(word)>0) ? target.GetLeft():target.GetRight();
-			}
-			
 			while (true) {
-				System.out.println("insert\t"+node.GetWord());
-				if (tmp.GetWord().compareTo(node.GetWord()) > 0) {
-					if (tmp.GetLeft() != null) {
-						tmp = tmp.GetLeft();
+				if (target.GetWord().compareTo(node.GetWord()) < 0) {
+					if (target.GetLeft() == null) {
+						target.SetLeft(node);
+						return;
 					} else {
-						tmp.SetLeft(node);
-						break;
+						target = target.GetLeft();
 					}
-				} else if (tmp.GetWord().compareTo(node.GetWord()) < 0) {
-					if (tmp.GetRight() != null) {
-						tmp = tmp.GetRight();
+				} else if (target.GetWord().compareTo(node.GetWord()) > 0) {
+					if (target.GetRight() == null) {
+						target.SetRight(node);
+						return;
 					} else {
-						tmp.SetRight(node);
-						break;
+						target = target.GetRight();
 					}
 				} else {
-					System.out.println("µ¿ÀÏÇÑ ´Ü¾î°¡ ÀÔ·ÂµÇ¾ú½À´Ï´Ù");
 					return;
 				}
-				return;
 			}
 		}
 	}
 
 	public WordNode Delete(String word) {
 		WordNode target = root, parent = null;
-		while(target!=null && !target.GetWord().equals(word)) {
+		while (target != null && !target.GetWord().equals(word)) {
 			parent = target;
-			target = (target.GetWord().compareTo(word)>0) ? target.GetLeft():target.GetRight();
+			target = (target.GetWord().compareTo(word) > 0) ? target.GetLeft() : target.GetRight();
 		}
 		// not found
-		if(target == null) {
+		if (target == null) {
 			return null;
 		}
-		// ¸®ÇÁ ³ëµå
-		if(target.GetLeft() == null && target.GetRight() == null) {
-			if(parent == null) {
+		//no children
+		if (target.GetLeft() == null && target.GetRight() == null) {
+			if (parent == null) {
 				root = null;
-			}else if(parent.GetLeft() == target) {
+			} else if (parent.GetLeft() == target) {
 				parent.SetLeft(null);
-			}else {
+			} else {
 				parent.SetRight(null);
 			}
-		// ¿ŞÂÊÀÌ ºñ¾îÀÖ´Â ³ëµå
-		} else if(target.GetLeft() == null) {
-			if(parent == null) {
+			// only right child
+		} else if (target.GetLeft() == null) {
+			if (parent == null) {
 				root = target.GetRight();
-			}else if(parent.GetLeft() == target) {
+			} else if (parent.GetLeft() == target) {
 				parent.SetLeft(target.GetRight());
-			}else {
+			} else {
 				parent.SetRight(target.GetRight());
 			}
-		// ¿À¸¥ÂÊÀÌ ºñ¾îÀÖ´Â ³ëµå
-		} else if(target.GetRight() == null) {
-			if(parent == null) {
+			// only left child
+		} else if (target.GetRight() == null) {
+			if (parent == null) {
 				root = target.GetLeft();
-			}else if(parent.GetLeft() == target) {
+			} else if (parent.GetLeft() == target) {
 				parent.SetLeft(target.GetLeft());
-			}else {
+			} else {
 				parent.SetRight(target.GetLeft());
 			}
-		// µÑ´Ù ÀÖ´Â ³ëµå
+			// both left and right
 		} else {
 			WordNode prevprev = target, prev = target.GetRight(), current = target.GetRight().GetLeft();
-			while(current!=null) {
+			while (current != null) {
 				prevprev = prev;
 				prev = current;
 				current = current.GetLeft();
 			}
-			
+
 			target.SetMean(prev.GetMean());
 			target.SetWord(prev.GetWord());
-			if(prevprev == target) {
+			if (prevprev == target) {
 				prevprev.SetRight(prev.GetRight());
-			}else {
+			} else {
 				prevprev.SetLeft(prev.GetRight());
 			}
 		}
@@ -112,15 +102,14 @@ public class WordBST {
 	}
 
 	public WordNode Search(String word) {
-		
 
-		WordNode target = root, parent = null;
-		
-		while(target!=null && !target.GetWord().equals(word)) {
-			parent = target;
-			target = (target.GetWord().compareTo(word)>0) ? target.GetLeft():target.GetRight();
+		WordNode target = root; //, parent = null;
+
+		while (target != null && !target.GetWord().equals(word)) {
+			//parent = target;
+			target = (target.GetWord().compareTo(word) > 0) ? target.GetLeft() : target.GetRight();
 		}
-		
+
 		return target;
 	}
 
@@ -130,13 +119,49 @@ public class WordBST {
 	}
 
 	public boolean Save() throws IOException {
-		return false;
+		BufferedInputStream bis;
+		BufferedOutputStream bos;
+		
+		// ì´ì–´ ì“°ê¸°ë¥¼ ìœ„í•œ íŒŒì¼ ì½ê¸°
+		StringBuffer pre_contents = new StringBuffer("");
+		bis = new BufferedInputStream(new FileInputStream("memorizing_word.txt"));
+		byte buffer[] = new byte[1024];
+		while ((bis.read(buffer)) != -1) {
+			pre_contents.append(new String(buffer, "utf-8"));
+		}
+		bis.close();
+		
+		// ì“¸ ë¬¸ìì—´ = ì´ì „ ë‚´ìš© + ì‘ì„±í•œ ë‚´ìš©
+		String contents = pre_contents.toString() + this.toString(root);
+		
+		// íŒŒì¼ ì“°ê¸°
+		bos = new BufferedOutputStream(new FileOutputStream("memorizing_word.txt"));
+		bos.write(contents.getBytes("utf-8"));
+		
+		bos.close();
+		return true;
+	}
+
+	public String toString()  {
+		try {
+			return toString(root);
+		}catch(Exception e) {
+			return "";
+		}
+	}
+	public String toString(WordNode node) throws IOException {
+		if (node == null)
+			return "";
+		String result = node.toString() + "\n";
+		result = result + this.toString(node.GetLeft());
+		result = result + this.toString(node.GetRight());
+		return result;
 	}
 
 	public void Preorder(WordNode node) throws IOException {
 		if (node == null)
 			return;
-		System.out.println("word: " + node.GetWord() +", mean: "+node.GetMean());
+		System.out.println("word: " + node.GetWord() + ", mean: " + node.GetMean());
 		Preorder(node.GetLeft());
 		Preorder(node.GetRight());
 	}
@@ -144,14 +169,12 @@ public class WordBST {
 	public static void main(String[] args) throws IOException {
 
 		WordBST w = new WordBST();
-		w.Insert(new WordNode("apple", "»ç°ú"));
-		w.Insert(new WordNode("banana", "¹Ù³ª³ª"));
-		w.Insert(new WordNode("cat", "°í¾çÀÌ"));
+		w.Insert(new WordNode("cat", "ê³ ì–‘ì´"));
+		w.Insert(new WordNode("banana", "ë°”ë‚˜ë‚˜"));
+		w.Insert(new WordNode("apple", "ì‚¬ê³¼"));
+		w.Insert(new WordNode("doctor", "ì˜ì‚¬"));
+		w.Insert(new WordNode("eagle", "ë…ìˆ˜ë¦¬"));
 		w.Print();
-		WordNode root = w.getRoot();
-		System.out.println(root.GetWord());
-		System.out.println(root.GetRight().GetWord());
-		System.out.println(root.GetRight().GetRight().GetWord());
-		//System.out.println(root.GetLeft().GetWord());
+		w.Save();
 	}
 }

@@ -66,4 +66,7 @@ public class WordNode {
 	public void SetNext(WordNode node) {
 		this.pNext = node;
 	}
+	public String toString() {
+		return "w\t"+this.GetWord()+"\t"+this.GetMean();
+	}
 }

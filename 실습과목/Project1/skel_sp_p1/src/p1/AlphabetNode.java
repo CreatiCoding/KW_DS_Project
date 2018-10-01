@@ -58,5 +58,8 @@ public class AlphabetNode {
 	{
 		this.bst = node;
 	}
+	public String toString() {
+		return "a\t"+this.GetAlphabet();
+	}
 
 }
