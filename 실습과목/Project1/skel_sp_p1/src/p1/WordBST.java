@@ -46,6 +46,7 @@ public class WordBST {
 
 	public WordNode Delete(String word) {
 		WordNode target = root, parent = null;
+		WordNode result =null;
 		while (target != null && !target.GetWord().equals(word)) {
 			parent = target;
 			target = (target.GetWord().compareTo(word) > 0) ? target.GetLeft() : target.GetRight();
@@ -89,16 +90,24 @@ public class WordBST {
 				prev = current;
 				current = current.GetLeft();
 			}
-
+			// switch target and prev
+			String temp = target.GetMean();
 			target.SetMean(prev.GetMean());
+			prev.SetMean(temp);
+			temp = target.GetWord();
 			target.SetWord(prev.GetWord());
+			prev.SetWord(temp);
+			
+			// return object
+			result=prev;
+			
 			if (prevprev == target) {
 				prevprev.SetRight(prev.GetRight());
 			} else {
 				prevprev.SetLeft(prev.GetRight());
 			}
 		}
-		return target;
+		return result;
 	}
 
 	public WordNode Search(String word) {
@@ -122,7 +131,7 @@ public class WordBST {
 		BufferedInputStream bis;
 		BufferedOutputStream bos;
 		
-		// 이어 쓰기를 위한 파일 읽기
+		// �씠�뼱 �벐湲곕�� �쐞�븳 �뙆�씪 �씫湲�
 		StringBuffer pre_contents = new StringBuffer("");
 		bis = new BufferedInputStream(new FileInputStream("memorizing_word.txt"));
 		byte buffer[] = new byte[1024];
@@ -131,10 +140,10 @@ public class WordBST {
 		}
 		bis.close();
 		
-		// 쓸 문자열 = 이전 내용 + 작성한 내용
+		// �벝 臾몄옄�뿴 = �씠�쟾 �궡�슜 + �옉�꽦�븳 �궡�슜
 		String contents = pre_contents.toString() + this.toString(root);
 		
-		// 파일 쓰기
+		// �뙆�씪 �벐湲�
 		bos = new BufferedOutputStream(new FileOutputStream("memorizing_word.txt"));
 		bos.write(contents.getBytes("utf-8"));
 		
@@ -169,11 +178,11 @@ public class WordBST {
 	public static void main(String[] args) throws IOException {
 
 		WordBST w = new WordBST();
-		w.Insert(new WordNode("cat", "고양이"));
-		w.Insert(new WordNode("banana", "바나나"));
-		w.Insert(new WordNode("apple", "사과"));
-		w.Insert(new WordNode("doctor", "의사"));
-		w.Insert(new WordNode("eagle", "독수리"));
+		w.Insert(new WordNode("cat", "怨좎뼇�씠"));
+		w.Insert(new WordNode("banana", "諛붾굹�굹"));
+		w.Insert(new WordNode("apple", "�궗怨�"));
+		w.Insert(new WordNode("doctor", "�쓽�궗"));
+		w.Insert(new WordNode("eagle", "�룆�닔由�"));
 		w.Print();
 		w.Save();
 	}
