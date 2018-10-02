@@ -9,22 +9,24 @@ import p1.WordNode;
 public class Queue {
 
 	public WordNode pHead;
-
+	private int WordCnt;
 	Queue() {
 		pHead = null;
+		WordCnt = 0;
 	}
 
 	// LOAD, ADD
 	public void Push(WordNode node) {
-		if(this.Search(node.GetWord()) != null)
+		if(this.Search(node.GetWord()) != null) {
 			return ;
-		else if (pHead == null)
+		}else if (pHead == null) {
+			WordCnt++;
 			pHead = node;
-		else {
+		}else {
 			WordNode tmp = pHead;
 			while (tmp.GetNext() != null)
 				tmp = tmp.GetNext();
-			
+			WordCnt++;
 			tmp.SetNext(node);
 		}
 	}
@@ -35,7 +37,7 @@ public class Queue {
 		tmp = pHead;
 		pHead = tmp.GetNext();
 
-		return pHead;
+		return tmp;
 	}
 
 	// SEARCH, UPDATE
@@ -67,12 +69,10 @@ public class Queue {
 			return false;
 		} else {
 			while (tmp.GetNext() != null) {
-				System.out.printf(tmp.GetWord(), " ");
-				System.out.println(tmp.GetMean());
+				System.out.println(tmp.GetWord() + " " + tmp.GetMean());
 				tmp = tmp.GetNext();
 			}
-			System.out.printf(tmp.GetWord(), " ");
-			System.out.println(tmp.GetMean());
+			System.out.println(tmp.GetWord() + " " + tmp.GetMean());
 			return true;
 		}
 	}
@@ -107,7 +107,12 @@ public class Queue {
 		return true;
 
 	}
-
+	public boolean isEmpty() {
+		return this.pHead == null;
+	}
+	public int getCnt() {
+		return this.WordCnt;
+	}
 	public static void main(String[] args) throws IOException {
 
 		System.out.println("hello world!");
@@ -121,7 +126,6 @@ public class Queue {
 		test.Push(new WordNode("dear", "친애하는"));
 		
 		test.Save();
-		System.out.println(test.toString());
 		test.Print();
 	}
 

@@ -14,7 +14,7 @@ public class WordNode {
 	}
 
 	WordNode(String word, String mean) {
-		this.wordmean = new Pair<String, String>(word, mean);
+		this.wordmean = new Pair<String, String>(word.trim(), mean.trim());
 		this.pLeft = null;
 		this.pRight = null;
 		this.pNext = null;
@@ -48,11 +48,11 @@ public class WordNode {
 	}
 
 	public void SetWord(String word) {
-		this.wordmean.first = word;
+		this.wordmean.first = word.trim();
 	}
 
 	public void SetMean(String mean) {
-		this.wordmean.second = mean;
+		this.wordmean.second = mean.trim();
 	}
 
 	public void SetLeft(WordNode node) {

@@ -11,11 +11,17 @@ import java.io.ObjectOutputStream;
 
 public class CircularLinkedList {
 	public WordNode pHead; // Circular Linked List Head Pointer
+	private int WordCnt;
 
 	public CircularLinkedList() {
 		this.pHead = null;
+		WordCnt=0;
 	}
 
+	public int getCnt() {
+		return WordCnt;
+	}
+	
 	public void Delete(String word) {
 		if (this.pHead == null) {
 			return;
@@ -27,47 +33,47 @@ public class CircularLinkedList {
 		} else {
 			WordNode target = this.pHead;
 			WordNode parent = this.pHead.GetNext();
-			
+
 			// 부모 찾기
-			while((!word.equals(parent.GetNext().GetWord()))&&!(parent.GetNext()==this.pHead)) {
+			while ((!word.equals(parent.GetNext().GetWord())) && !(parent.GetNext() == this.pHead)) {
 				parent = parent.GetNext();
 			}
 			// 대상 찾기
 			target = parent.GetNext();
-			
-			if(target == this.pHead) {
+
+			if (target == this.pHead) {
 				this.pHead = this.pHead.GetNext();
 			}
 			// 부모의 next는 target의 next 가리킨다.
 			parent.SetNext(target.GetNext());
-			
+
 			// target은 null을 가리켜 지운다.
 			target = null;
-			
+
 		}
-		return ;
+		return;
 	}
 
 	public void Insert(WordNode node) {
 		if (this.pHead == null) {
 			this.pHead = node;
 			this.pHead.SetNext(node);
+			WordCnt++;
 		} else if (this.pHead.GetNext() == this.pHead) {
 			this.pHead.SetNext(node);
 			node.SetNext(this.pHead);
-			this.pHead = node;
+			WordCnt++;
 		} else {
 			WordNode temp = this.pHead;
 			WordNode parent = this.pHead.GetNext();
-			
 			// 부모 찾기
-			while(parent.GetNext() != temp) {
+			while (parent.GetNext() != temp) {
 				parent = parent.GetNext();
 			}
 			// 부모 next는 새로운 노드를 가리킨다.
 			parent.SetNext(node);
 			node.SetNext(this.pHead);
-			this.pHead = node;
+			WordCnt++;
 		}
 	}
 
@@ -103,7 +109,19 @@ public class CircularLinkedList {
 	}
 
 	public boolean Print() throws IOException {
-		System.out.print(this.toString());
+
+		if (this.pHead == null) {
+			System.out.println("Empty.");
+		} else if (this.pHead.GetNext() == this.pHead) {
+			System.out.println(this.pHead.GetWord()+" "+this.pHead.GetMean());
+		} else {
+			WordNode temp = this.pHead;
+			while (temp.GetNext() != this.pHead) {
+				System.out.println(temp.GetWord()+" "+temp.GetMean());
+				temp = temp.GetNext();
+			}
+			System.out.println(temp.GetWord()+" "+temp.GetMean());
+		}
 		return true;
 	}
 
@@ -139,14 +157,14 @@ public class CircularLinkedList {
 		CircularLinkedList test = new CircularLinkedList();
 		test.Print();
 
-		test.Insert(new WordNode("apple", "사과"));
-		test.Insert(new WordNode("banana", "바나나"));
-		test.Insert(new WordNode("cat", "고양이"));
-		test.Insert(new WordNode("doctor", "의사"));
 		test.Insert(new WordNode("eagle", "독수리"));
-		
+		test.Insert(new WordNode("east", "동쪽"));
+		test.Insert(new WordNode("eat", "먹다"));
+		test.Insert(new WordNode("file", "더미"));
+		test.Insert(new WordNode("five", "다섯"));
+		test.Insert(new WordNode("fox", "여우"));
+
 		test.Print();
-		test.Save();
 
 	}
 }

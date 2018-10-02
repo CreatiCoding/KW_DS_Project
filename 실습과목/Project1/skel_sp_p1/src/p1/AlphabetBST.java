@@ -1,11 +1,7 @@
 package p1;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class AlphabetBST {
@@ -35,6 +31,8 @@ public class AlphabetBST {
 	}
 
 	public void Insert(AlphabetNode node) {
+		if(node.GetBST() == null)
+			node.SetBST(new WordBST());
 		if (root == null) {
 			root = node;
 		} else {
@@ -62,7 +60,7 @@ public class AlphabetBST {
 	}
 
 	public boolean Print() throws IOException {
-		Preorder(root);
+		this.Preorder(root);
 		return true;
 	}
 
@@ -94,7 +92,6 @@ public class AlphabetBST {
 			result += (node.toString() + "\n");
 			if (node.GetBST() != null)
 				result += (node.GetBST().toString());
-			System.out.println(node.GetAlphabet());
 			result += toString(node.GetRight());
 
 			return result;
@@ -124,8 +121,8 @@ public class AlphabetBST {
 	public void Preorder(AlphabetNode node) throws IOException {
 		if (node == null)
 			return;
+		node.GetBST().Print();
 		Preorder(node.GetLeft());
-		System.out.println(node.GetAlphabet());
 		Preorder(node.GetRight());
 	}
 
@@ -141,12 +138,13 @@ public class AlphabetBST {
 
 		AlphabetBST test = new AlphabetBST();
 		test.InsertWord(new WordNode("cat", "고양이"));
-		test.InsertWord(new WordNode("banana", "바나나"));
+		test.InsertWord(new WordNode("candy", "사탕"));
 		test.InsertWord(new WordNode("apple", "사과"));
 		test.InsertWord(new WordNode("air", "공기"));
 		test.InsertWord(new WordNode("ant", "개미"));
-		test.InsertWord(new WordNode("doctor", "의사"));
-		test.InsertWord(new WordNode("eagle", "독수리"));
-		test.Save();
+		test.InsertWord(new WordNode("church", "교회"));
+		
+		test.Print();
+		
 	}
 }
