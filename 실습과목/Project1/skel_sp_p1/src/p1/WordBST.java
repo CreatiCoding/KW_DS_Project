@@ -12,26 +12,37 @@ public class WordBST {
 
 	public WordNode root; // Word BST Root
 
+	/**
+	 * init
+	 */
 	public WordBST() {
 		root = null;
 	}
 
+	/**
+	 * insert node in bst
+	 * @param node
+	 */
 	public void Insert(WordNode node) {
+		// if empty
 		if (root == null) {
 			root = node;
 		} else {
 			WordNode target = root;
-
+			// go loop
 			while (true) {
-				
+				// if smaller go left
 				if (target.GetWord().compareTo(node.GetWord()) > 0) {
+					// if leaf, add node
 					if (target.GetLeft() == null) {
 						target.SetLeft(node);
 						return;
 					} else {
 						target = target.GetLeft();
 					}
+				// if bigger go right
 				} else if (target.GetWord().compareTo(node.GetWord()) < 0) {
+					// if leaf, add node
 					if (target.GetRight() == null) {
 						target.SetRight(node);
 						return;
@@ -45,8 +56,14 @@ public class WordBST {
 		}
 	}
 
+	/**
+	 * delete node
+	 * @param word
+	 * @return
+	 */
 	public WordNode Delete(String word) {
 		WordNode target = root, parent = null;
+		// found parent
 		while (target != null && !target.GetWord().equals(word)) {
 			parent = target;
 			target = (target.GetWord().compareTo(word) > 0) ? target.GetLeft() : target.GetRight();
@@ -90,7 +107,8 @@ public class WordBST {
 				prev = current;
 				current = current.GetRight();
 			}
-			
+
+			// swap target and prev
 			String temp = target.GetWord();
 			target.SetWord(prev.GetWord());
 			prev.SetWord(temp);
@@ -98,6 +116,7 @@ public class WordBST {
 			target.SetMean(prev.GetMean());
 			prev.SetMean(temp);
 			
+			// end game) check last node for delete
 			if (prevprev == target) {
 				prevprev.SetLeft(prev.GetLeft());
 			} else {
@@ -107,28 +126,42 @@ public class WordBST {
 		return target;
 	}
 
+	/**
+	 * search node
+	 * @param word
+	 * @return
+	 */
 	public WordNode Search(String word) {
 
-		WordNode target = root; //, parent = null;
-
+		// find node
+		WordNode target = root;
 		while (target != null && !target.GetWord().equals(word)) {
-			//parent = target;
 			target = (target.GetWord().compareTo(word) > 0) ? target.GetLeft() : target.GetRight();
 		}
 
 		return target;
 	}
 
+	/**
+	 * print node
+	 * @return
+	 * @throws IOException
+	 */
 	public boolean Print() throws IOException {
 		Preorder(root);
 		return true;
 	}
 
+	/**
+	 * save contents in file
+	 * @return
+	 * @throws IOException
+	 */
 	public boolean Save() throws IOException {
 		BufferedInputStream bis;
 		BufferedOutputStream bos;
 		
-		// 이어 쓰기를 위한 파일 읽기
+		// for append save pre-contents
 		StringBuffer pre_contents = new StringBuffer("");
 		bis = new BufferedInputStream(new FileInputStream("memorizing_word.txt"));
 		byte buffer[] = new byte[1024];
@@ -137,17 +170,20 @@ public class WordBST {
 		}
 		bis.close();
 		
-		// 쓸 문자열 = 이전 내용 + 작성한 내용
+		// plus contents
 		String contents = pre_contents.toString() + this.toString(root);
 		
-		// 파일 쓰기
+		// write file
 		bos = new BufferedOutputStream(new FileOutputStream("memorizing_word.txt"));
 		bos.write(contents.getBytes("utf-8"));
 		
 		bos.close();
 		return true;
 	}
-
+	
+	/**
+	 * tostring function for save 
+	 */
 	public String toString()  {
 		try {
 			return toString(root);
@@ -155,6 +191,12 @@ public class WordBST {
 			return "";
 		}
 	}
+	/**
+	 * tostring function for save by recursving
+	 * @param node
+	 * @return
+	 * @throws IOException
+	 */
 	public String toString(WordNode node) throws IOException {
 		if (node == null)
 			return "";
@@ -164,6 +206,11 @@ public class WordBST {
 		return result;
 	}
 
+	/**
+	 * print in pre-order
+	 * @param node
+	 * @throws IOException
+	 */
 	public void Preorder(WordNode node) throws IOException {
 		if (node == null)
 			return;
@@ -172,7 +219,12 @@ public class WordBST {
 		Preorder(node.GetRight());
 	}
 
-	public static void main(String[] args) throws IOException {
+	/**
+	 * just for test code.
+	 * @param args
+	 * @throws IOException
+	 */
+	public static void test() throws IOException {
 
 		WordBST w = new WordBST();
 		w.Insert(new WordNode("cat", "고양이"));

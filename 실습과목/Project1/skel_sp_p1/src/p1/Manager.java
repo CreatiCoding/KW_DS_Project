@@ -23,10 +23,17 @@ public class Manager {
 		return "";
 	}
 	
+	/**
+	 * read contents from file
+	 * @param fileName
+	 * @return
+	 */
 	public String file2str(String fileName) {
+		// init
 		BufferedInputStream bis;
-		// 이어 쓰기를 위한 파일 읽기
 		StringBuffer pre_contents = new StringBuffer("");
+		
+		// read contents
 		try {
 			bis = new BufferedInputStream(new FileInputStream(fileName));
 			byte buffer[] = new byte[1024];
@@ -35,17 +42,27 @@ public class Manager {
 			}
 			bis.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		// return contents
 		return pre_contents.toString();
 	}
 
+	/**
+	 * convert one line to word token for commands
+	 * @param contents
+	 * @return
+	 */
 	public String[] str2commands(String contents) {
 		String[] line = contents.split("\n");
 		return line;
 	}
 
+	/**
+	 * convert string contents to CircularLinkedList
+	 * @param contents
+	 * @return
+	 */
 	public CircularLinkedList str2Cll(String contents) {
 		CircularLinkedList cll = new CircularLinkedList();
 		String[] line = contents.split("\n");
@@ -58,6 +75,11 @@ public class Manager {
 		return cll;
 	}
 
+	/**
+	 * convert string contents to queue
+	 * @param contents
+	 * @return
+	 */
 	public Queue str2Queue(String contents) {
 		Queue queue = new Queue();
 		String[] line = contents.split("\n");
@@ -70,6 +92,12 @@ public class Manager {
 		return queue;
 	}
 
+
+	/**
+	 * convert string contents to word bst
+	 * @param contents
+	 * @return
+	 */
 	public WordBST str2WordBST(String contents) {
 		WordBST result = new WordBST();
 		String[] line = contents.split("\n");
@@ -82,6 +110,11 @@ public class Manager {
 		return result;
 	}
 
+	/**
+	 * convert string contents to alphabet bst
+	 * @param contents
+	 * @return
+	 */
 	public AlphabetBST str2AlphabetBST(String contents) {
 		AlphabetBST result = new AlphabetBST();
 
@@ -100,7 +133,11 @@ public class Manager {
 
 		return result;
 	}
-
+	/**
+	 *	do command 
+	 * @param command
+	 * @throws IOException
+	 */
 	public void run(String command) throws IOException {
 		String[] split = command.trim().split(" ");
 		this.cmd = command.trim();
@@ -108,7 +145,9 @@ public class Manager {
 		if (split[0] == null || "".equals(split[0])) {
 			return;
 		}
-
+		/**
+		 * just first character check for performance
+		 */
 		switch (split[0].charAt(0)) {
 		case 'L':
 			if ("LOAD".equals(split[0])) {
@@ -128,7 +167,7 @@ public class Manager {
 					System.out.println("======== " + split[0] + " ========");
 					System.out.println("Success");
 				} else {
-					// 에러 200
+					// �뿉�윭 200
 					System.out.println("======== ERROR ========");
 					System.out.println("200");
 				}
@@ -154,7 +193,7 @@ public class Manager {
 					System.out.println("======== " + split[0] + " ========");
 					System.out.println("Success");
 				} else {
-					// 에러 100
+					// �뿉�윭 100
 					System.out.println("======== ERROR ========");
 					System.out.println("400");
 				}
@@ -201,7 +240,7 @@ public class Manager {
 		case 'E':
 			if ("EXIT".equals(split[0])) {
 				if (split.length < 2 || split[1] == null || "".equals(split[1])) {
-					// 코드 작성
+					// 肄붾뱶 �옉�꽦
 					System.out.println("======== " + split[0] + " ========");
 					System.out.println("Success");
 					System.out.println("=======================\n");
@@ -218,6 +257,11 @@ public class Manager {
 		}
 	}
 
+	/**
+	 * load from file
+	 * @return
+	 * @throws IOException
+	 */
 	public boolean LOAD() throws IOException {
 		String[] split = this.cmd.split(" ");
 		if (split.length < 2 || split[1] == null || "".equals(split[1])) {
@@ -241,6 +285,11 @@ public class Manager {
 		}
 	}
 
+	/**
+	 * add from file
+	 * @return
+	 * @throws IOException
+	 */
 	public boolean ADD() throws IOException {
 		String[] split = this.cmd.split(" ");
 		if (split.length < 2 || split[1] == null || "".equals(split[1])) {
@@ -266,15 +315,17 @@ public class Manager {
 				}
 			}
 		} else {
-			// 에러 200
 			return false;
 		}
 	}
 
+	/**
+	 * move 'to memorize word' to 'memorizing' 
+	 * @return
+	 */
 	public boolean MOVE() {
 		String[] split = this.cmd.split(" ");
 		if (split.length < 2 || split[1] == null || "".equals(split[1])) {
-			// 에러 300
 			return false;
 		} else {
 			try {
@@ -285,7 +336,6 @@ public class Manager {
 				if ((num + bst.getCnt() > 100) || queue.isEmpty() || num > queue.getCnt()) {
 					return false;
 				} else {
-					// 코드 작성
 					for (int i = 0; i < num; i++) {
 						WordNode temp = queue.Pop();
 						bst.InsertWord(temp);
@@ -293,12 +343,16 @@ public class Manager {
 					return true;
 				}
 			} catch (NumberFormatException e) {
-				// 에러 300
 				return false;
 			}
 		}
 	}
 
+	/**
+	 * save in file
+	 * @return
+	 * @throws IOException
+	 */
 	public boolean SAVE() throws IOException {
 		String[] split = this.cmd.split(" ");
 		if (split.length < 2 || split[1] == null || "".equals(split[1])) {
@@ -307,7 +361,7 @@ public class Manager {
 					|| !(new File("memorized_word.txt").exists())) {
 				return false;
 			} else {
-				// 코드 작성
+				// check save status
 				if(	this.queue.Save() && this.bst.Save() && this.cll.Save() )
 					return true;
 				else
@@ -318,13 +372,15 @@ public class Manager {
 		}
 	}
 
+	/**
+	 * testing for memorizing
+	 * @return
+	 */
 	public boolean TEST() {
 		String[] split = this.cmd.split(" ");
-		// Error 500
 		if (split.length < 3 || split[1] == null || "".equals(split[1]) || split[2] == null
 				|| "".equals(split[2])) {
 			return false;
-			// Error 500
 		} else {
 			AlphabetNode temp = bst.Search(split[1].toUpperCase().charAt(0));
 			// Not Found Error
@@ -334,6 +390,7 @@ public class Manager {
 			} else if (!split[2].equals(temp.GetBST().Search(split[1]).GetMean())) {
 				return false;
 			} else {
+				// if corrent them, insert to cll
 				WordNode target = temp.GetBST().Delete(split[1]);
 				this.cll.Insert(target);
 				return true;
@@ -341,29 +398,32 @@ public class Manager {
 		}
 	}
 
+	/**
+	 * search word
+	 * @return
+	 * @throws IOException
+	 */
 	public boolean SEARCH() throws IOException {
 		String[] split = this.cmd.split(" ");
 
 		if (split.length < 2 || split[1] == null || "".equals(split[1])) {
-			// 에러 100
 			return false;
 		} else {
-			// 코드 작성
+			// if found print contents
 			if (queue.Search(split[1]) != null) {
 				System.out.println("======== " + split[0] + " ========");
 				System.out.println(split[1] + " " + queue.Search(split[1]).GetMean());
+			// if found print contents
 			} else if (cll.Search(split[1]) != null) {
 				System.out.println("======== " + split[0] + " ========");
 				System.out.println(split[1] + " " + cll.Search(split[1]).GetMean());
 			} else if (bst.Search(split[1].toUpperCase().charAt(0)) == null) {
-				// 못찾
 				return false;
 			} else if (bst.Search(split[1].toUpperCase().charAt(0)).GetBST() == null) {
-				// 못찾
 				return false;
 			} else if (bst.Search(split[1].toUpperCase().charAt(0)).GetBST().Search(split[1]) == null) {
-				// 못찾
 				return false;
+			// if found print contents
 			} else {
 				String mean = bst.Search(split[1].toUpperCase().charAt(0)).GetBST().Search(split[1]).GetMean();
 				System.out.println("======== " + split[0] + " ========");
@@ -373,12 +433,18 @@ public class Manager {
 		return true;
 	}
 
+	/**
+	 * Print by several type
+	 * @return
+	 * @throws IOException
+	 */
 	public boolean PRINT() throws IOException {
 		String[] split = this.cmd.split(" ");
 
 		if (split.length < 2 || split[1] == null || "".equals(split[1])) {
 			return false;
 		} else {
+			// to memorize word print
 			if ("TO_MEMORIZE".equals(split[1])) {
 				if (split[2] != null) {
 					return false;
@@ -387,6 +453,7 @@ public class Manager {
 					this.queue.Print();
 					return true;
 				}
+			// memorized word print
 			} else if ("MEMORIZED".equals(split[1])) {
 				if (split.length == 3 && split[2] != null) {
 					return false;
@@ -397,6 +464,7 @@ public class Manager {
 					this.cll.Print();
 					return true;
 				}
+			// memorizing word print
 			} else if ("MEMORIZING".equals(split[1])) {
 				System.out.println("======== " + split[0] + " ========");
 				this.bst.Print();
@@ -406,7 +474,11 @@ public class Manager {
 			}
 		}
 	}
-
+	/**
+	 * update word
+	 * @return
+	 * @throws IOException
+	 */
 	public boolean UPDATE() throws IOException {
 		String[] split = this.cmd.split(" ");
 		// Error 500
@@ -415,23 +487,21 @@ public class Manager {
 			return false;
 			// Error 500
 		} else {
-			// 코드 작성
+			// find from queue
 			WordNode temp;
 			if (queue.Search(split[1]) != null) {
 				temp = queue.Search(split[1]);
+			// find from cll
 			} else if (cll.Search(split[1]) != null) {
 				temp = cll.Search(split[1]);
 			} else if (bst.Search(split[1].toUpperCase().charAt(0)) == null) {
-				// 못찾
-				System.out.println(1);
+				// not found
 				return false;
 			} else if (bst.Search(split[1].toUpperCase().charAt(0)).GetBST() == null) {
-				// 못찾
-				System.out.println(2);
+				// not found
 				return false;
 			} else if (bst.Search(split[1].toUpperCase().charAt(0)).GetBST().Search(split[1]) == null) {
-				// 못찾
-				System.out.println(3);
+				// not found
 				return false;
 			} else {
 				temp = bst.Search(split[1].toUpperCase().charAt(0)).GetBST().Search(split[1]);

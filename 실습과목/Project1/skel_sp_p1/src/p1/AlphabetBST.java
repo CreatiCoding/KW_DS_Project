@@ -86,17 +86,27 @@ public class AlphabetBST {
 	 * @throws IOException
 	 */
 	public boolean Print() throws IOException {
+		// print by preorder
 		this.Preorder(root);
 		return true;
 	}
 
+	/**
+	 * Search alphabetnode by alphabet
+	 * @param alpabet
+	 * @return
+	 */
 	public AlphabetNode Search(char alpabet) {
+		
 		AlphabetNode tmp = root;
 		while (tmp != null) {
+			// if find return node
 			if (tmp.GetAlphabet() == alpabet) {
 				return tmp;
+			// if smaller, go left
 			} else if (tmp.GetAlphabet() > alpabet) {
 				tmp = tmp.GetLeft();
+			// if bigger, go right
 			} else if (tmp.GetAlphabet() < alpabet) {
 				tmp = tmp.GetRight();
 			}
@@ -104,18 +114,28 @@ public class AlphabetBST {
 		return tmp;
 	}
 
+	/**
+	 * tostring function for print or save
+	 */
 	public String toString() {
 		return this.toString(root);
 	}
 
+	/**
+	 * tostring recursive string
+	 * @param node
+	 * @return
+	 */
 	public String toString(AlphabetNode node) {
 		String result = "";
-
+		// if null, return ""
 		if (node == null) {
 			return "";
 		} else {
+			// if Inorder
 			result += toString(node.GetLeft());
 			result += (node.toString() + "\n");
+			// if null do noting
 			if (node.GetBST() != null)
 				result += (node.GetBST().toString());
 			result += toString(node.GetRight());
@@ -125,7 +145,7 @@ public class AlphabetBST {
 	}
 
 	/**
-	 * TODO WordBST�� �����ϴ� ����� ����ؾ���
+	 * save contents in file
 	 * 
 	 * @return
 	 * @throws IOException
@@ -133,10 +153,10 @@ public class AlphabetBST {
 	public boolean Save() throws IOException {
 		BufferedOutputStream bos;
 
-		// 쓸 문자열 = 이전 내용 + 작성한 내용
+		// get contents string from BST.
 		String contents = this.toString(root);
 
-		// 파일 쓰기
+		// write file
 		bos = new BufferedOutputStream(new FileOutputStream("memorizing_word.txt"));
 		bos.write(contents.getBytes("utf-8"));
 		bos.close();
@@ -144,6 +164,11 @@ public class AlphabetBST {
 		return true;
 	}
 
+	/**
+	 * print in pre-order
+	 * @param node
+	 * @throws IOException
+	 */
 	public void Preorder(AlphabetNode node) throws IOException {
 		if (node == null)
 			return;
@@ -152,15 +177,28 @@ public class AlphabetBST {
 		Preorder(node.GetRight());
 	}
 
+	/**
+	 * get count about words.
+	 * @return
+	 */
 	public int getCnt() {
 		return this.WordCnt;
 	}
-
+	
+	/**
+	 * set count about words
+	 * @param cnt
+	 */
 	public void setCnt(int cnt) {
 		this.setCnt(cnt);
 	}
 
-	public static void main(String[] args) throws IOException {
+	/**
+	 * just for test code.
+	 * @param args
+	 * @throws IOException
+	 */
+	public static void test() throws IOException {
 
 		AlphabetBST test = new AlphabetBST();
 		test.InsertWord(new WordNode("cat", "고양이"));

@@ -11,6 +11,10 @@ public class AlphabetNode {
 		this('\0');
 	}
 
+	/**
+	 * init
+	 * @param alphabet
+	 */
 	AlphabetNode(char alphabet)
 	{
 		this.SetAlphabet(alphabet);
@@ -58,6 +62,9 @@ public class AlphabetNode {
 	{
 		this.bst = node;
 	}
+	/**
+	 * tostring function for print or save
+	 */
 	public String toString() {
 		return "a\t"+this.GetAlphabet();
 	}
