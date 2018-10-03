@@ -20,7 +20,7 @@ public class AlphabetNode {
 		this.SetAlphabet(alphabet);
 		this.SetLeft(null);
 		this.SetRight(null);
-		this.SetBST(null);
+		this.SetBST(new WordBST());
 	}
 	
 	public char GetAlphabet()
