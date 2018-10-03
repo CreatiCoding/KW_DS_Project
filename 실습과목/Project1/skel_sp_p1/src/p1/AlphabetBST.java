@@ -8,21 +8,29 @@ public class AlphabetBST {
 	private AlphabetNode root;
 	private int WordCnt;
 
+	/**
+	 * constructor
+	 */
 	public AlphabetBST() {
+		// init variable
 		root = null;
 		WordCnt = 0;
-
 		char[] alpha = { 'P', 'H', 'X', 'D', 'L', 'T', 'Z', 'B', 'F', 'J', 'N', 'R', 'V', 'Y', 'A', 'C', 'E', 'G', 'I',
 				'K', 'M', 'O', 'Q', 'S', 'U', 'W' };
-
+		// init AlphabetBST
 		for (int i = 0; i < 26; i++) {
 			this.Insert(new AlphabetNode(alpha[i]));
 		}
-
 	}
 
+	/**
+	 * insert word to BST
+	 * @param node
+	 */
 	public void InsertWord(WordNode node) {
+		// get alphabet from word first letter. then, get alphabetnode.
 		AlphabetNode target = this.Search(node.GetWord().toUpperCase().charAt(0));
+		// if null,  
 		if (target.GetBST() == null) {
 			target.SetBST(new WordBST());
 		}
@@ -30,35 +38,53 @@ public class AlphabetBST {
 		this.WordCnt++;
 	}
 
+	/**
+	 * insert alphabet to BST
+	 * @param node
+	 */
 	public void Insert(AlphabetNode node) {
-		if(node.GetBST() == null)
-			node.SetBST(new WordBST());
+		// if empty
 		if (root == null) {
 			root = node;
+		// if not empty
 		} else {
 			AlphabetNode tmp = root;
+			// go loop until insert node in proper place
 			while (true) {
+				// if alphabet is smaller
 				if (tmp.GetAlphabet() > node.GetAlphabet()) {
+					// if left exists, then go left
 					if (tmp.GetLeft() != null) {
 						tmp = tmp.GetLeft();
+					// if not, insert in left
 					} else {
 						tmp.SetLeft(node);
 						break;
 					}
+				// if alphabet is bigger
 				} else if (tmp.GetAlphabet() < node.GetAlphabet()) {
+					// if right exists, then go left
 					if (tmp.GetRight() != null) {
 						tmp = tmp.GetRight();
+					// if not, insert in right
 					} else {
 						tmp.SetRight(node);
 						break;
 					}
+				// if alphabet is same
 				} else {
+					// do nothing
 					return;
 				}
 			}
 		}
 	}
 
+	/**
+	 * print word in pre-order
+	 * @return
+	 * @throws IOException
+	 */
 	public boolean Print() throws IOException {
 		this.Preorder(root);
 		return true;
