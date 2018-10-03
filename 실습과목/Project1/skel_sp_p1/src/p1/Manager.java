@@ -38,7 +38,7 @@ public class Manager {
 			bis = new BufferedInputStream(new FileInputStream(fileName));
 			byte buffer[] = new byte[1024];
 			while ((bis.read(buffer)) != -1) {
-				pre_contents.append(new String(buffer, "utf-8"));
+				pre_contents.append(new String(buffer));
 			}
 			bis.close();
 		} catch (IOException e) {
@@ -240,7 +240,6 @@ public class Manager {
 		case 'E':
 			if ("EXIT".equals(split[0])) {
 				if (split.length < 2 || split[1] == null || "".equals(split[1])) {
-					// 肄붾뱶 �옉�꽦
 					System.out.println("======== " + split[0] + " ========");
 					System.out.println("Success");
 					System.out.println("=======================\n");

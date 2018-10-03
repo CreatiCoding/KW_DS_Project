@@ -166,7 +166,7 @@ public class WordBST {
 		bis = new BufferedInputStream(new FileInputStream("memorizing_word.txt"));
 		byte buffer[] = new byte[1024];
 		while ((bis.read(buffer)) != -1) {
-			pre_contents.append(new String(buffer, "utf-8"));
+			pre_contents.append(new String(buffer));
 		}
 		bis.close();
 		
@@ -175,7 +175,7 @@ public class WordBST {
 		
 		// write file
 		bos = new BufferedOutputStream(new FileOutputStream("memorizing_word.txt"));
-		bos.write(contents.getBytes("utf-8"));
+		bos.write(contents.getBytes());
 		
 		bos.close();
 		return true;
@@ -236,5 +236,6 @@ public class WordBST {
 		w.Delete("eagle");
 		System.out.println("");
 		w.Print();
+		w.Save();
 	}
 }

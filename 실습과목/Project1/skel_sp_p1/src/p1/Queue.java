@@ -144,10 +144,10 @@ public class Queue {
 
 		// get contents from queue.
 		String contents = this.toString(this.pHead);
-
+		System.out.println(contents);
 		// save contents in to_memorized_word file.
 		bos = new BufferedOutputStream(new FileOutputStream("to_memorize_word.txt"));
-		bos.write(contents.getBytes("utf-8"));
+		bos.write(contents.getBytes());
 		bos.close();
 		return true;
 
@@ -187,5 +187,4 @@ public class Queue {
 		test.Save();
 		test.Print();
 	}
-
 }

@@ -197,7 +197,7 @@ public class CircularLinkedList {
 	public boolean Save() throws IOException {
 		BufferedOutputStream bos;
 		bos = new BufferedOutputStream(new FileOutputStream("memorized_word.txt"));
-		bos.write(this.toString().getBytes("utf-8"));
+		bos.write(this.toString().getBytes());
 		bos.close();
 		return true;
 	}
@@ -213,13 +213,12 @@ public class CircularLinkedList {
 		test.Print();
 
 		test.Insert(new WordNode("eagle", "독수리"));
-		test.Insert(new WordNode("east", "동쪽"));
-		test.Insert(new WordNode("eat", "먹다"));
+		test.Insert(new WordNode("east", "먹다"));
+		test.Insert(new WordNode("eat", "동쪽"));
 		test.Insert(new WordNode("file", "파일"));
 		test.Insert(new WordNode("five", "다섯"));
 		test.Insert(new WordNode("fox", "여우"));
 
 		test.Print();
-
 	}
 }

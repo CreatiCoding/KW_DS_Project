@@ -9,13 +9,13 @@ public class main {
 		/**
 		 * For saving in log file.
 		 * if comment 13, 14, 16, 17, 24, 25, 27, 28 then print contents in console not in log.txt
-		 */
+*/
+		 
 		PrintStream sysout = System.out;
 		PrintStream printStream = new PrintStream(new FileOutputStream("log.txt", true)); 
 		
 		System.out.println("Program start!");
 		System.setOut(printStream);
-
 		Manager m = new Manager();
 		// load command then run
 		String[] commands = m.str2commands(m.file2str("command.txt"));
