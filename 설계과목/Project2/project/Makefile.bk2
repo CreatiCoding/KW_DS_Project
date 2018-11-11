@@ -1,0 +1,10 @@
+all:test.o
+
+AVLTree.o:
+	g++ -c AVLTree.cpp -o AVLTree.o
+test.o: AVLTree.o
+	g++ test.cpp AVLTree.o -o test.o
+run:
+	./test.o
+clean:
+	rm *.o

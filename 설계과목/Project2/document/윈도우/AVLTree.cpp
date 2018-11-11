@@ -11,39 +11,42 @@ AVLTree::~AVLTree(){
 }
 
 bool AVLTree::Insert(StockData* pSto){
-	/* ¾Æ·¡ ÀÛ¼ºµÈ ÄÚµå´Â ÀÌ¿ë ¶Ç´Â »èÁ¦, º¯°æÀÌ °¡´ÉÇÔ -- °úÁ¦ Á¦Ãâ ½Ã º» ÁÖ¼® »èÁ¦*/
+	/* Flowing code can be used, modified, deleted. -- When submit assignment, delete this comment */
 	AVLNode* pNew = new AVLNode;
 	pNew->setSD(pSto);	
 	char	*pName = pSto->getName();
 	int		rotation = 0;
 
+	// case #0 empty tree	
 	if(root == NULL){
 		root = pNew;
 		return true;
 	}
 
+	// Find Place to insert data
+	
 	
 
 }
 
 bool AVLTree::Print(){
-	/* ¾Æ·¡ ÀÛ¼ºµÈ ÄÚµå´Â ÀÌ¿ë ¶Ç´Â »èÁ¦, º¯°æÀÌ °¡´ÉÇÔ -- °úÁ¦ Á¦Ãâ ½Ã º» ÁÖ¼® »èÁ¦*/
+	/* Flowing code can be used, modified, deleted. -- When submit assignment, delete this comment */
 	stack<AVLNode*> s;	 
 
 	return true;
 }
 
 bool AVLTree::Search(char* name){
-	AVLNode *pCur = root; // º¯¼ö ¸í º¯°æ °¡´É
+	AVLNode *pCur = root;
 
 
 
 	/* 
-	¾Æ·¡ ÀÛ¼ºµÈ ÄÚµå´Â °Ë»öÇÑ ³ëµå¸¦ vector¸¦ ÀÌ¿ëÇÑ heap¿¡ ÀúÀåÇÏ´Â ÄÚµå·Î
-	ÀÌ¿ë ¶Ç´Â »èÁ¦, º¯°æÀÌ °¡´ÉÇÔ -- °úÁ¦ Á¦Ãâ ½Ã º» ÁÖ¼® »èÁ¦
+	¿¿ ¿¿¿ ¿¿¿ ¿¿¿ ¿¿¿ vector¿ ¿¿¿ heap¿ ¿¿¿¿ ¿¿¿
+	¿¿ ¿¿ ¿¿, ¿¿¿ ¿¿¿ -- ¿¿ ¿¿ ¿ ¿ ¿¿ ¿¿
 	*/
 	
-	StockData* pSD = pCur->getSD(); // pCurÀº nameÀ» °¡Áø AVL ³ëµå¸¦ °¡¸®Å´
+	StockData* pSD = pCur->getSD(); // pCur¿ name¿ ¿¿ AVL ¿¿¿ ¿¿¿
 	vHeap.push_back( make_pair( make_pair(pSD->getAvgGrade(), pSD->getStockID()), pSD));
 	push_heap(vHeap.begin(), vHeap.end(), compare);
 
@@ -51,7 +54,7 @@ bool AVLTree::Search(char* name){
 }
 
 bool AVLTree::Rank(){
-	/* ¾Æ·¡ ÀÛ¼ºµÈ ÄÚµå´Â ÀÌ¿ë ¶Ç´Â »èÁ¦, º¯°æÀÌ °¡´ÉÇÔ -- °úÁ¦ Á¦Ãâ ½Ã º» ÁÖ¼® »èÁ¦*/
+	/* Flowing code can be used, modified, deleted. -- When submit assignment, delete this comment */
 	if(vHeap.empty())		return false;
 
 	StockData* pSto;
