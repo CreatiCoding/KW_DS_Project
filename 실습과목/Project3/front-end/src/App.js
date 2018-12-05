@@ -1,8 +1,15 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import HomeRoute from "./routes/HomeRoute";
-import AboutRoute from "./routes/AboutRoute";
-import PostRoute from "./routes/PostRoute";
+
+import QuestionRoute from "./routes/QuestionRoute";
+import QuestionsRoute from "./routes/QuestionsRoute";
+import QuestionWriteRoute from "./routes/QuestionWriteRoute";
+import SolutionRoute from "./routes/SolutionRoute";
+import SolutionsRoute from "./routes/SolutionsRoute";
+import SolutionWriteRoute from "./routes/SolutionWriteRoute";
+import LoginRoute from "./routes/LoginRoute";
+import JoinRoute from "./routes/JoinRoute";
+
 import logo from "./logo.svg";
 import "./App.css";
 import { connect } from "react-redux";
@@ -32,10 +39,36 @@ class App extends Component {
             </div>
 
             <div className="app">
-              <Route exact path="/" component={HomeRoute} />
-              <Route exact path="/about" component={AboutRoute} />
-              <Route exact path="/post" component={PostRoute} />
-              <Route exact path="/post/:post_idx" component={PostRoute} />
+              <Route exact path="/" component={QuestionsRoute} />
+              <Route exact path="/home" component={QuestionsRoute} />
+              <Route exact path="/questions" component={QuestionsRoute} />
+              <Route
+                exact
+                path="/question/:question_idx"
+                component={QuestionRoute}
+              />
+              <Route
+                exact
+                path="/questionWrite"
+                component={QuestionWriteRoute}
+              />
+              <Route
+                exact
+                path="/solutions/:question_idx"
+                component={SolutionsRoute}
+              />
+              <Route
+                exact
+                path="/solution/:solution_idx"
+                component={SolutionRoute}
+              />
+              <Route
+                exact
+                path="/solutionWrite/:question_idx"
+                component={SolutionWriteRoute}
+              />
+              <Route exact path="/join" component={JoinRoute} />
+              <Route exact path="/login" component={LoginRoute} />
             </div>
           </div>
         </Router>
