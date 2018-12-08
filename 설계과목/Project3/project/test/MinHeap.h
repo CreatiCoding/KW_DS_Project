@@ -4,14 +4,14 @@
 #include <utility>
 #include <vector>
 
-template<typename TKey, typename TValue>
+template <typename TKey, typename TValue>
 class MinHeap
 {
-private:
+  private:
     // array for the elements which should be heap-sorted
     std::vector<std::pair<TKey, TValue>> m_vec;
 
-public:
+  public:
     MinHeap() {}
 
     /// <summary>
@@ -68,7 +68,7 @@ public:
     /// </param>
     void DecKey(TValue target, TKey newKey);
 
-private:
+  private:
     /// <summary>
     /// heap-sort, heapify.<para/>
     /// this function can be called recursively
