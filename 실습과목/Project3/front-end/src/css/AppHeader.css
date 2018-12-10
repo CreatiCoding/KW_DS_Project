@@ -1,0 +1,52 @@
+.app-header {
+  background-color: #222;
+  height: 45px;
+  padding: 5px 10px 0 10px;
+  margin-bottom: 10px;
+}
+.app-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 30px;
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.app-header-left {
+  float: left;
+}
+.app-header-title {
+  color: white;
+}
+.app-header-left {
+  display: inline;
+}
+.app-header-left div {
+  display: inline;
+}
+.app-header-right {
+  float: right;
+}
+.app-header-title {
+  font-size: 30px;
+}
+.app-header-block {
+  margin-right: 10px;
+  margin-left: 10px;
+  display: inline;
+}
+
+.app-header div {
+  height: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.app-header-right a {
+  text-decoration: none;
+  color: white;
+  font-size: 25px;
+}
