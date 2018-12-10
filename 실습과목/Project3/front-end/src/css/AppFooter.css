@@ -1,0 +1,9 @@
+.app-footer {
+  font-size: 15px;
+  color: #aaaaaa;
+}
+.footer-copyright a {
+  color: #505050;
+  text-decoration: none;
+  font-style: italic;
+}

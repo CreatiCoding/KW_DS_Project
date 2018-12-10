@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "../App.css";
 import AppHeader from "./AppHeader";
 import AppWrapper from "./AppWapper";
+import AppFooter from "./AppFooter";
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <div className="App">
         <AppHeader />
         <AppWrapper />
+        <AppFooter />
       </div>
     </Router>
   );
