@@ -17,7 +17,10 @@ const AppHeader = ({ match }) => {
           <Link to="/">홈</Link>
         </div>
         <div className="app-header-block">
-          <Link to="/problem/list">문제풀기</Link>
+          <Link to="/problem/list">문제보기</Link>
+        </div>
+        <div className="app-header-block">
+          <Link to="/answer/list/1">풀이보기</Link>
         </div>
         <div className="app-header-block">
           <Link to="/rank/list">순위</Link>

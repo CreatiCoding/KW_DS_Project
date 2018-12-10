@@ -1,16 +1,16 @@
 import React from "react";
 
 //console.log(match.params.toon_info_idx);
-const SolutionRoute = ({ match }) => {
+const AnswerListRoute = ({ match }) => {
   let contents = {
     fontSize: "large"
   };
   return (
     <div style={contents}>
-      Welcome to about SolutionRoute!!
-      <br /> {match.params.solution_idx}
+      Welcome to about AnswerListRoute!!
+      <br /> {match.params.idx}
     </div>
   );
 };
 
-export default SolutionRoute;
+export default AnswerListRoute;
