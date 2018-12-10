@@ -4,11 +4,13 @@ import "../App.css";
 import AppHeader from "./AppHeader";
 import AppWrapper from "./AppWapper";
 import AppFooter from "./AppFooter";
+import Filter from "./Filter";
 
 const App = () => {
   return (
     <Router>
       <div className="App">
+        <Filter />
         <AppHeader />
         <AppWrapper />
         <AppFooter />
