@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 // @Controller
 @RestController
 public class TestController {
-	
+
 	// @ResponseBody
 	@RequestMapping("/")
 	public String test() {
-		return "Spring Boot Test";
+		return "Hello World! Spring Project";
 	}
 }
