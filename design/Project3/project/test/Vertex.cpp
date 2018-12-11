@@ -1,5 +1,5 @@
 #include "Vertex.h"
-
+#include <iostream>
 /**
      *  int m_key;
      *  int m_size;
@@ -60,6 +60,7 @@ void Vertex::AddEdge(int edgeKey, int weight)
         prev = curr;
         while (curr->GetNext() != NULL)
         {
+            std::cout << curr->GetKey() << " " << newE->GetKey();
             if (curr->GetKey() > newE->GetKey())
             {
                 if (curr == prev)
