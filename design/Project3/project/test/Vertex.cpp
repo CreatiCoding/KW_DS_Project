@@ -50,9 +50,9 @@ void Vertex::AddEdge(int edgeKey, int weight)
     Edge *curr = m_pEHead;
     Edge *prev = NULL;
 
-    if (curr == NULL)
+    if (m_pEHead == NULL)
     {
-        curr = newE;
+        m_pEHead = newE;
     }
     else
     {
