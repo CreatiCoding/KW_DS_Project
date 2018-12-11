@@ -7,6 +7,8 @@
     */
 Edge::Edge()
 {
+    m_key = 0;
+    m_weight = 0;
 }
 
 /// copy constructor
