@@ -9,6 +9,7 @@ Edge::Edge()
 {
     m_key = 0;
     m_weight = 0;
+    m_pNext = NULL;
 }
 
 /// copy constructor
@@ -16,6 +17,7 @@ Edge::Edge(int key, int weight)
 {
     m_key = key;
     m_weight = weight;
+    m_pNext = NULL;
 }
 
 /// set the next pointer of this edge

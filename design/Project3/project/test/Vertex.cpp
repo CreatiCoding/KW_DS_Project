@@ -64,10 +64,12 @@ void Vertex::AddEdge(int edgeKey, int weight)
             {
                 m_pEHead = newE;
                 newE->SetNext(curr);
+                return;
             }
             else
             {
                 curr->SetNext(newE);
+                return;
             }
         }
         while (curr->GetNext() != NULL)

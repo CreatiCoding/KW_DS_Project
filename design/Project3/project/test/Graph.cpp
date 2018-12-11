@@ -2,7 +2,6 @@
 #include "Stack.h"
 #include "MinHeap.h"
 #include <set>
-#include <iostream>
 #define DFS_FIRST_PATH
 
 Graph::Graph()
@@ -114,8 +113,8 @@ void Graph::Print(std::ofstream &fout)
         if (v_i == NULL)
         {
             for (int j = 0; j < size; j++)
-                cout << "0 ";
-            cout << endl;
+                fout << "0 ";
+            fout << endl;
         }
         else
         {
@@ -124,9 +123,9 @@ void Graph::Print(std::ofstream &fout)
             {
                 for (int j = 0; j < size; j++)
                 {
-                    cout << "0 ";
+                    fout << "0 ";
                 }
-                cout << endl;
+                fout << endl;
             }
             else
             {
@@ -134,15 +133,15 @@ void Graph::Print(std::ofstream &fout)
                 {
                     if (e_i != NULL && e_i->GetKey() == j)
                     {
-                        cout << e_i->GetWeight() << " ";
+                        fout << e_i->GetWeight() << " ";
                         e_i = e_i->GetNext();
                     }
                     else
                     {
-                        cout << "0 ";
+                        fout << "0 ";
                     }
                 }
-                cout << endl;
+                fout << endl;
             }
         }
     }
