@@ -53,32 +53,35 @@ void Vertex::AddEdge(int edgeKey, int weight)
     if (curr == NULL)
     {
         m_pEHead = newE;
+        m_size++;
     }
     else
     {
-        if (curr->GetKey() > newE->GetKey())
+        prev = curr;
+        while (curr->GetNext() != NULL)
         {
-            m_pEHead = newE;
-            newE->SetNext(curr);
-            return;
-        }
-        while (curr != NULL)
-        {
-            if (curr->GetKey() < newE->GetKey())
+            if (curr->GetKey() > newE->GetKey())
+            {
+                if (curr == prev)
+                {
+                    m_pEHead = newE;
+                    newE->SetNext(curr);
+                    m_size++;
+                    break;
+                }
+                else
+                {
+                    prev->SetNext(newE);
+                    newE->SetNext(curr);
+                    m_size++;
+                    break;
+                }
+            }
+            else
             {
                 prev = curr;
                 curr = curr->GetNext();
             }
-            else
-            {
-                prev->SetNext(newE);
-                newE->SetNext(curr);
-                break;
-            }
-        }
-        if (curr == NULL)
-        {
-            prev->SetNext(newE);
         }
     }
 }
