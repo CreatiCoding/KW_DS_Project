@@ -58,9 +58,20 @@ void Vertex::AddEdge(int edgeKey, int weight)
     else
     {
         prev = curr;
+        if (curr->GetNext() == NULL)
+        {
+            if (curr->GetKey() > newE->GetKey())
+            {
+                m_pEHead = newE;
+                newE->SetNext(curr);
+            }
+            else
+            {
+                curr->SetNext(newE);
+            }
+        }
         while (curr->GetNext() != NULL)
         {
-            std::cout << curr->GetKey() << ", " << newE->GetKey();
             if (curr->GetKey() > newE->GetKey())
             {
                 if (curr == prev)
@@ -68,20 +79,36 @@ void Vertex::AddEdge(int edgeKey, int weight)
                     m_pEHead = newE;
                     newE->SetNext(curr);
                     m_size++;
-                    break;
+                    return;
                 }
                 else
                 {
                     prev->SetNext(newE);
                     newE->SetNext(curr);
                     m_size++;
-                    break;
+                    return;
                 }
             }
             else
             {
                 prev = curr;
                 curr = curr->GetNext();
+            }
+        }
+        if (curr->GetNext() == NULL)
+        {
+            if (curr->GetKey() > newE->GetKey())
+            {
+                prev->SetNext(newE);
+                newE->SetNext(curr);
+                m_size++;
+                return;
+            }
+            else
+            {
+                curr->SetNext(newE);
+                m_size++;
+                return;
             }
         }
     }
