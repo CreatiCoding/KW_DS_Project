@@ -63,13 +63,11 @@ Result Manager::Load(const char *filepath)
         {
             if (data[i][j] != 0)
             {
-                cout << "turn: " << data[i][j];
                 m_graph.AddEdge(i, j, data[i][j]);
-                cout << m_graph.FindVertex(i)->GetHeadOfEdge()->GetWeight();
             }
         }
     }
-    //m_graph.Print(fout);
+    m_graph.Print(fout);
     for (int i = 0; i < size; i++)
         delete[] data[i];
     delete[] data;
