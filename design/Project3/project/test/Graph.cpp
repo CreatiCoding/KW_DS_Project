@@ -96,7 +96,7 @@ int Graph::Size() const
 void Graph::Clear()
 {
     Vertex *curr = m_pVHead;
-    while (curr == NULL)
+    while (curr != NULL)
     {
         Vertex *willDel = curr;
         curr = curr->GetNext();
