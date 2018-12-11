@@ -4,7 +4,7 @@ import "../App.css";
 import AppHeader from "./AppHeader";
 import AppWrapper from "./AppWapper";
 import AppFooter from "./AppFooter";
-import Filter from "./Filter";
+import Filter from "../containers/Filter";
 
 const App = () => {
   return (

@@ -1,0 +1,33 @@
+.problem-column-idx {
+  width: 50px;
+}
+.problem-column-title {
+  width: 350px;
+}
+.problem-column-difficulty {
+  width: 100px;
+}
+.problem-column-accepted {
+  width: 100px;
+}
+.problem-column-writer {
+  width: 200px;
+}
+.problem-column-share {
+  width: 100px;
+}
+.problem-column {
+}
+.problem-table {
+  display: inline-block;
+}
+.problem-column-default {
+  border: solid 1px white;
+  background: rgba(128, 128, 128, 0.5);
+}
+.problem-column-header {
+  height: 30px;
+}
+.problem-column-content {
+  height: 45px;
+}

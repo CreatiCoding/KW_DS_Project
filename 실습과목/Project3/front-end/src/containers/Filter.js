@@ -2,10 +2,10 @@ import { withRouter } from "react-router-dom";
 
 import { Component } from "react";
 
-function isNormalInteger(str) {
-  var n = Math.floor(Number(str));
+const isNormalInteger = str => {
+  const n = Math.floor(Number(str));
   return n !== Infinity && String(n) === str && n >= 0;
-}
+};
 
 class Filter extends Component {
   constructor(props) {
@@ -20,7 +20,8 @@ class Filter extends Component {
       //"/answer/list/",
       "/answer/",
       "/join",
-      "/login"
+      "/login",
+      "/rank/list"
     ];
     const currentPath = window.location.pathname;
     for (let i = 0; i < allowPaths.length; i++) {

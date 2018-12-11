@@ -16,18 +16,20 @@ import "../css/AppWrapper.css";
 const AppWrapper = () => {
   return (
     <div className="app-wrawpper">
-      <Route exact path="/" component={HomeRoute} />
-      <Route exact path="/home" component={HomeRoute} />
+      <div className="app-wrawpper-inner">
+        <Route exact path="/" component={HomeRoute} />
+        <Route exact path="/home" component={HomeRoute} />
 
-      <Route exact path="/problem/list" component={ProblemListRoute} />
-      <Route exact path="/problem/write" component={ProblemWriteRoute} />
-      <Route exact path="/problem/:idx(\d+)" component={ProblemRoute} />
+        <Route exact path="/problem/list" component={ProblemListRoute} />
+        <Route exact path="/problem/write" component={ProblemWriteRoute} />
+        <Route exact path="/problem/:idx(\d+)" component={ProblemRoute} />
 
-      <Route exact path="/answer/list/:idx" component={AnswerListRoute} />
-      <Route exact path="/answer/:idx(\d+)" component={AnswerRoute} />
+        <Route exact path="/answer/list/:idx" component={AnswerListRoute} />
+        <Route exact path="/answer/:idx(\d+)" component={AnswerRoute} />
 
-      <Route exact path="/join" component={JoinRoute} />
-      <Route exact path="/login" component={LoginRoute} />
+        <Route exact path="/join" component={JoinRoute} />
+        <Route exact path="/login" component={LoginRoute} />
+      </div>
     </div>
   );
 };

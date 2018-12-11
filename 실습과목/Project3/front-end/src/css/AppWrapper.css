@@ -3,4 +3,13 @@
 }
 .app-wrawpper {
   min-height: 512px;
+  margin: auto 0;
+}
+
+.app-wrawpper-inner {
+  min-height: 512px;
+  width: 1080px;
+  display: inline-block;
+  max-width: 1080px;
+  background: white;
 }
