@@ -50,17 +50,23 @@ void Vertex::AddEdge(int edgeKey, int weight)
     Edge *curr = m_pEHead;
     Edge *prev = NULL;
 
-    if (m_pEHead == NULL)
+    if (curr == NULL)
     {
         m_pEHead = newE;
     }
     else
     {
-        prev = curr;
+        if (curr->GetKey() > newE->GetKey())
+        {
+            m_pEHead = newE;
+            newE->SetNext(curr);
+            return;
+        }
         while (curr != NULL)
         {
             if (curr->GetKey() < newE->GetKey())
             {
+                prev = curr;
                 curr = curr->GetNext();
             }
             else
