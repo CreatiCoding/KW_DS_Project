@@ -7,10 +7,19 @@
      *  Vertex* m_pNext;
     */
 
-Vertex::Vertex(){};
+Vertex::Vertex()
+{
+    m_key = -1;
+    m_size = 0;
+    m_pEHead = NULL;
+    m_pNext = NULL;
+};
 Vertex::Vertex(int key)
 {
     m_key = key;
+    m_size = 0;
+    m_pEHead = NULL;
+    m_pNext = NULL;
 }
 Vertex::~Vertex()
 {
