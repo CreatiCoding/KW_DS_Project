@@ -66,13 +66,8 @@ Result Manager::Load(const char *filepath)
     }
 
     for (int i = 0; i < size; i++)
-    {
-        for (int j = 0; j < size; j++)
-        {
-            delete[] data[i];
-        }
-        delete[] data;
-    }
+        delete[] data[i];
+    delete[] data;
     fin.close();
     return Result::Success;
     // TODO: implement
