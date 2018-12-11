@@ -10,12 +10,17 @@ Manager::~Manager()
         ferr.close();
 }
 
-void Manager::Run(const char* filepath)
+void Manager::Run(const char *filepath)
 {
     fout.open(RESULT_LOG_PATH);
     ferr.open(ERROR_LOG_PATH);
 
     // TODO: implement
+
+    /**
+     * test Code 
+     */
+    Load("mapdata.txt");
 }
 void Manager::PrintError(Result result)
 {
@@ -34,8 +39,42 @@ void Manager::PrintError(Result result)
 /// Result::Success if load is successful.
 /// Result::LoadFileNotExist if file is not exist.
 /// </returns>
-Result Manager::Load(const char* filepath)
+Result Manager::Load(const char *filepath)
 {
+    std::ifstream fin;
+    fin.open(filepath, std::ifstream::in);
+    int size = 0;
+    fin >> size;
+    int **data = new int *[size];
+    for (int i = 0; i < size; i++)
+    {
+        data[i] = new int[size];
+        memset(data[i], 0, sizeof(int) * size);
+        for (int j = 0; j < size; j++)
+        {
+            fin >> data[i][j];
+        }
+    }
+    cout << "input is complete. size: " << size << endl;
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size; j++)
+        {
+            cout << data[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size; j++)
+        {
+            delete[] data[i];
+        }
+        delete[] data;
+    }
+    fin.close();
+    return Result::Success;
     // TODO: implement
 }
 /// <summary>
@@ -49,6 +88,7 @@ Result Manager::Load(const char* filepath)
 Result Manager::Print()
 {
     // TODO: implement
+    return Result::Success;
 }
 /// <summary>
 /// find the path from startVertexKey to endVertexKey with DFS (stack)
@@ -65,10 +105,10 @@ Result Manager::Print()
 /// Result::InvalidVertexKey or Result::GraphNotExist or Result::InvalidAlgorithm if an exception has occurred.
 /// Result::Success otherwise.
 /// </returns>
-Result Manager::FindPathDfs(int startVertexKey, int endVertexKey)
-{
-    // TODO: implement
-}
+//Result Manager::FindPathDfs(int startVertexKey, int endVertexKey)
+//{
+//    // TODO: implement
+//}
 /// <summary>
 /// find the shortest path from startVertexKey to endVertexKey with Dijkstra using std::set
 /// </summary>
@@ -84,10 +124,10 @@ Result Manager::FindPathDfs(int startVertexKey, int endVertexKey)
 /// Result::InvalidVertexKey or Result::GraphNotExist or Result::InvalidAlgorithm if an exception has occurred.
 /// Result::Success otherwise.
 /// </returns>
-Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVertexKey)
-{
-    // TODO: implement
-}
+//Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVertexKey)
+//{
+//    // TODO: implement
+//}
 /// <summary>
 /// find the shortest path from startVertexKey to endVertexKey with Dijkstra using MinHeap
 /// </summary>
@@ -103,10 +143,10 @@ Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVert
 /// Result::InvalidVertexKey or Result::GraphNotExist or Result::InvalidAlgorithm if an exception has occurred.
 /// Result::Success otherwise.
 /// </returns>
-Result Manager::FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int endVertexKey)
-{
-    // TODO: implement
-}
+//Result Manager::FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int endVertexKey)
+//{
+//    // TODO: implement
+//}
 /// <summary>
 /// find the shortest path from startVertexKey to endVertexKey with Bellman-Ford
 /// </summary>
@@ -122,7 +162,7 @@ Result Manager::FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int end
 /// Result::InvalidVertexKey or Result::GraphNotExist or Result::NegativeCycleDetected if exception has occurred.
 /// Result::Success otherwise.
 /// </returns>
-Result Manager::FindShortestPathBellmanFord(int startVertexKey, int endVertexKey)
-{
-    // TODO: implement
-}
+//Result Manager::FindShortestPathBellmanFord(int startVertexKey, int endVertexKey)
+//{
+//    // TODO: implement
+//}

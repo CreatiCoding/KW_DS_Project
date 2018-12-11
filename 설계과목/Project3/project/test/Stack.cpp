@@ -1,30 +1,47 @@
 #include "Stack.h"
 
-Stack:Stack(){
+template <typename T>
+Stack<T>::Stack()
+{
     m_pTop = NULL;
 }
-Stack:~Stack(){
-    while(!IsEmpty())
+
+template <typename T>
+Stack<T>::~Stack()
+{
+    while (!IsEmpty())
         Pop();
 }
-void Stack:Push(T data){
-    if(IsEmpty()){
+template <typename T>
+void Stack<T>::Push(T data)
+{
+    if (IsEmpty())
+    {
         m_pTop = new StackNode(data);
-    }else{
+    }
+    else
+    {
         StackNode *newTop = new StackNode(data);
         newTop->pNext = m_pTop;
         m_pTop = newTop;
     }
 }
-void Stack:Pop(){
+template <typename T>
+void Stack<T>::Pop()
+{
     StackNode *delTop = m_pTop;
     m_pTop = m_pTop->pNext;
     delete delTop;
 }
+
 template <typename T>
-T Stack:Top(){
+T Stack<T>::Top()
+{
     return m_pTop->Data;
 }
-bool Stack:IsEmpty(){
+
+template <typename T>
+bool Stack<T>::IsEmpty()
+{
     return m_pTop == NULL;
 }
