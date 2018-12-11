@@ -63,6 +63,7 @@ Result Manager::Load(const char *filepath)
         {
             if (data[i][j] != 0)
             {
+                cout << i << j << ": " << data[i][j] << endl;
                 m_graph.AddEdge(i, j, data[i][j]);
             }
         }
