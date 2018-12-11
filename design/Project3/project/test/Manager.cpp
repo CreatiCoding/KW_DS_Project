@@ -58,13 +58,17 @@ Result Manager::Load(const char *filepath)
     cout << "input is complete. size: " << size << endl;
     for (int i = 0; i < size; i++)
     {
+        m_graph.AddVertex(i);
         for (int j = 0; j < size; j++)
         {
-            cout << data[i][j] << " ";
+            if (data[i][j] != 0)
+            {
+                m_graph.AddEdge(i, j, data[i][j]);
+                cout << m_graph.FindVertex(i)->GetHeadOfEdge()->GetWeight();
+            }
         }
-        cout << endl;
     }
-
+    //m_graph.Print(fout);
     for (int i = 0; i < size; i++)
         delete[] data[i];
     delete[] data;
