@@ -60,7 +60,7 @@ void Vertex::AddEdge(int edgeKey, int weight)
         prev = curr;
         while (curr->GetNext() != NULL)
         {
-            std::cout << curr->GetKey() << " " << newE->GetKey();
+            std::cout << curr->GetKey() << ", " << newE->GetKey();
             if (curr->GetKey() > newE->GetKey())
             {
                 if (curr == prev)
