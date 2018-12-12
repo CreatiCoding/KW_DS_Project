@@ -65,15 +65,19 @@ void Manager::Run(const char *filepath)
         {
             PrintError(Result::NonDefinedCommand);
         }
+        else
+        {
+            PrintError(Result::NonDefinedCommand);
+        }
     }
 
     fin.close();
 }
 void Manager::PrintError(Result result)
 {
-    ferr << "===================" << endl;
-    ferr << "Error code: " << result << std::endl;
-    ferr << "===================" << endl;
+    fout << "===================" << endl;
+    fout << "Error code: " << result << std::endl;
+    fout << "===================" << endl;
 }
 
 Result Manager::Load(const char *filepath)
