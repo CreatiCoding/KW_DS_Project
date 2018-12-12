@@ -1,5 +1,6 @@
 #include "Manager.h"
 #include <cstring>
+#include "MinHeap.h"
 
 Manager::~Manager()
 {
@@ -21,6 +22,7 @@ void Manager::Run(const char *filepath)
      * test Code 
      */
     Load("mapdata.txt");
+    m_graph.Print(fout);
 }
 void Manager::PrintError(Result result)
 {
@@ -68,7 +70,6 @@ Result Manager::Load(const char *filepath)
         }
     }
 
-    m_graph.Print(fout);
     for (int i = 0; i < size; i++)
         delete[] data[i];
     delete[] data;
@@ -104,10 +105,17 @@ Result Manager::Print()
 /// Result::InvalidVertexKey or Result::GraphNotExist or Result::InvalidAlgorithm if an exception has occurred.
 /// Result::Success otherwise.
 /// </returns>
-//Result Manager::FindPathDfs(int startVertexKey, int endVertexKey)
-//{
-//    // TODO: implement
-//}
+Result Manager::FindPathDfs(int startVertexKey, int endVertexKey)
+{
+    // TODO: implement
+    vector<int> path = m_graph.FindPathDfs(startVertexKey, endVertexKey);
+
+    for (int i = 0; i < path.size(); i++)
+    {
+        cout << path.at(i) << " " << endl;
+    }
+    return Result::Success;
+}
 /// <summary>
 /// find the shortest path from startVertexKey to endVertexKey with Dijkstra using std::set
 /// </summary>

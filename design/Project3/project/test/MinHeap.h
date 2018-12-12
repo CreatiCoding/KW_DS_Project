@@ -68,6 +68,8 @@ public:
   /// </param>
   void DecKey(TValue target, TKey newKey);
 
+  void Print(int index);
+
 private:
   /// <summary>
   /// heap-sort, heapify.<para/>

@@ -30,7 +30,7 @@ public:
 private:
   Result Load(const char *filepath);
   Result Print();
-  //Result FindPathDfs(int startVertexKey, int endVertexKey);
+  Result FindPathDfs(int startVertexKey, int endVertexKey);
   //Result FindShortestPathDijkstraUsingSet(int startVertexKey, int endVertexKey);
   //Result FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int endVertexKey);
   //Result FindShortestPathBellmanFord(int startVertexKey, int endVertexKey);

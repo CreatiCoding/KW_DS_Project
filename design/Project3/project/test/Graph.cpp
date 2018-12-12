@@ -171,7 +171,67 @@ bool Graph::IsNegativeEdge()
 }
 
 /// find the path from startVertexKey to endVertexKey with DFS (stack)
-//std::vector<int> Graph::FindPathDfs(int startVertexKey, int endVertexKey) {}
+std::vector<int> Graph::FindPathDfs(int startVertexKey, int endVertexKey)
+{
+    bool *visit = new bool[m_vSize];
+    memset(visit, false, m_vSize);
+
+    Stack<Vertex *> stack;
+    Stack<Vertex *> result;
+    vector<int> path;
+    Vertex *v = FindVertex(startVertexKey);
+    stack.Push(v);
+    result.Push(v);
+
+    visit[startVertexKey] = true;
+
+    while (!stack.IsEmpty())
+    {
+        Vertex *vv = stack.Top();
+        stack.Pop();
+        bool flag = false;
+        Edge *e = vv->GetHeadOfEdge();
+
+        for (int i = 1; i <= m_vSize; i++)
+        {
+            if (e == NULL)
+            {
+                stack.Pop();
+                result.Pop();
+                break;
+            }
+            else if (visit[e->GetKey()])
+            {
+                e = e->GetNext();
+                continue;
+            }
+            else
+            {
+                Vertex *vvv = FindVertex(e->GetKey());
+                if (vvv == NULL)
+                {
+                    stack.Pop();
+                    result.Pop();
+                    break;
+                }
+                stack.Push(vvv);
+                result.Push(vvv);
+                visit[e->GetKey()] = true;
+                flag = true;
+            }
+        }
+        if (!flag)
+        {
+            stack.Pop();
+        }
+    }
+    while (!result.IsEmpty())
+    {
+        path.push_back(result.Top()->GetKey());
+        result.Pop();
+    }
+    return path;
+}
 
 /// find the shortest path from startVertexKey to endVertexKey with Dijkstra using std::set
 //std::vector<int> Graph::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVertexKey) {}
