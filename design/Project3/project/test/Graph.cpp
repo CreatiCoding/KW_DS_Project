@@ -305,6 +305,8 @@ std::vector<int> Graph::FindShortestPathDijkstraUsingSet(int startVertexKey, int
         // in pair)
         int u_key = tmp.first;
         Vertex *vertex = FindVertex(u_key);
+        if (vertex == NULL)
+            continue;
         Edge *connectedEdge = vertex->GetHeadOfEdge();
         // 'i' is used to get all adjacent vertices of a vertex
         while (connectedEdge != NULL)

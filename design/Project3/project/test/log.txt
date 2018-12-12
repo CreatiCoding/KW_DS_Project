@@ -3,3 +3,4 @@ shortest path: 1 3 4
 sorted nodes: 1 3 4 
 path length: 9
 ===============
+===== DFS =====
