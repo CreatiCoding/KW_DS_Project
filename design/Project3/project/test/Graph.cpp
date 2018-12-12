@@ -173,89 +173,110 @@ bool Graph::IsNegativeEdge()
 /// find the path from startVertexKey to endVertexKey with DFS (stack)
 std::vector<int> Graph::FindPathDfs(int startVertexKey, int endVertexKey)
 {
+    // 방문기록
     bool *visit = new bool[m_vSize];
     for (int i = 0; i < m_vSize; i++)
         visit[i] = false;
 
+    // 스택과 결과 벡터
     Stack<int> stack;
-    Stack<int> result;
-    vector<int> path;
+    vector<int> result;
+
+    // 첫번째 v 방문
     stack.Push(startVertexKey);
-    result.Push(startVertexKey);
 
-    visit[startVertexKey] = true;
-
+    // 스택을 조사
     while (!stack.IsEmpty())
     {
-        cout << "loop start " << stack.Top() << endl;
-        Vertex *vv = FindVertex(stack.Top());
+        // 스택에서 꺼내오기 및 결과에 업데이트
+        int current = stack.Top();
+        result.push_back(current);
+        visit[current] = true;
         stack.Pop();
-        bool flag = false;
-        Edge *e = vv->GetHeadOfEdge();
-        for (int i = 1; i <= m_vSize; i++)
-        {
-            if (e == NULL || visit[e->GetKey()])
-            {
-                stack.Pop();
-                result.Pop();
-                break;
-            }
-            else
-            {
-                int min = e->GetWeight();
-                int idx = 0;
-                Edge **list = new Edge *[vv->Size()];
-                list[0] = e;
 
-                for (int i = 0; i < vv->Size(); i++)
-                {
-                    for (int j = i; j < vv->Size(); j++)
-                    {
-                        cout << "i " << i << " j " << j << endl;
-                        if (list[i]->GetWeight() > list[j]->GetWeight())
-                        {
-                            Edge *temp = list[i];
-                            list[i] = list[j];
-                            list[j] = temp;
-                        }
-                    }
-                }
-                int seq = 0;
-                e = list[seq];
-                while (visit[e->GetKey()])
-                    e = list[++seq];
-                cout << "min: " << e->GetKey() << " " << e->GetWeight() << endl;
-                Vertex *vvv = FindVertex(e->GetKey());
+        // 도달
+        if (current == endVertexKey)
+            break;
 
-                if (vvv == NULL)
-                {
-                    stack.Pop();
-                    result.Pop();
-                    break;
-                }
-                else
-                {
-                    cout << "stack push " << vvv->GetKey() << endl;
-                    stack.Push(vvv->GetKey());
-                    result.Push(vvv->GetKey());
-                    visit[vvv->GetKey()] = true;
-                    flag = true;
-                    cout << "stack length " << stack.Size() << !stack.IsEmpty() << endl;
-                    break;
-                }
-            }
-        }
-        if (!flag)
+        // 스택에서 꺼내온 값으로 현재 v, e 업데이트
+        Vertex *currentVertex = FindVertex(current);
+        Edge *currentEdge = currentVertex->GetHeadOfEdge();
+
+        // 연결된 모든 edge는 방문하지 않았으면 모두 stack에 삽입
+        while (currentEdge != NULL)
         {
-            stack.Pop();
+            if (!visit[currentEdge->GetKey()])
+                stack.Push(currentEdge->GetKey());
+            currentEdge = currentEdge->GetNext();
         }
+
+        // Vertex *vv = FindVertex(stack.Top());
+        // stack.Pop();
+        // bool flag = false;
+        // Edge *e = vv->GetHeadOfEdge();
+        // for (int i = 1; i <= m_vSize; i++)
+        // {
+        //     if (e == NULL || visit[e->GetKey()])
+        //     {
+        //         stack.Pop();
+        //         result.Pop();
+        //         break;
+        //     }
+        //     else
+        //     {
+        //         // e부터 스택에 넣는다.
+        //         while (e != NULL)
+        //         {
+        //             stack.Push(e->GetKey());
+        //         }
+
+        //         Edge **list = new Edge *[vv->Size()];
+        //         for (int i = 0; i < vv->Size(); i++)
+        //         {
+        //             list[i] = e;
+        //             e = e->GetNext();
+        //         }
+
+        //         for (int i = 0; i < vv->Size(); i++)
+        //         {
+        //             for (int j = i; j < vv->Size(); j++)
+        //             {
+        //                 if (list[i]->GetWeight() > list[j]->GetWeight())
+        //                 {
+        //                     Edge *temp = list[i];
+        //                     list[i] = list[j];
+        //                     list[j] = temp;
+        //                 }
+        //             }
+        //         }
+        //         int seq = 0;
+        //         e = list[seq];
+        //         while (visit[e->GetKey()])
+        //             e = list[++seq];
+        //         Vertex *vvv = FindVertex(e->GetKey());
+
+        //         if (vvv == NULL)
+        //         {
+        //             stack.Pop();
+        //             result.Pop();
+        //             break;
+        //         }
+        //         else
+        //         {
+        //             stack.Push(vvv->GetKey());
+        //             result.Push(vvv->GetKey());
+        //             visit[vvv->GetKey()] = true;
+        //             flag = true;
+        //             break;
+        //         }
+        //     }
+        // }
+        // if (!flag)
+        // {
+        //     stack.Pop();
+        // }
     }
-    while (!result.IsEmpty())
-    {
-        path.push_back(result.Top());
-        result.Pop();
-    }
-    return path;
+    return result;
 }
 
 /// find the shortest path from startVertexKey to endVertexKey with Dijkstra using std::set
