@@ -1,6 +1,7 @@
 #include "Manager.h"
 #include <cstring>
 #include "MinHeap.h"
+#include "Stack.h"
 
 Manager::~Manager()
 {
@@ -21,8 +22,11 @@ void Manager::Run(const char *filepath)
     /**
      * test Code 
      */
-    Load("mapdata.txt");
-    m_graph.Print(fout);
+    //Load("mapdata.txt");
+    //m_graph.Print(fout);
+    Stack<int> s;
+    s.Push(1);
+    cout << s.Top() << endl;
 }
 void Manager::PrintError(Result result)
 {

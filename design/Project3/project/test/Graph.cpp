@@ -169,7 +169,7 @@ bool Graph::IsNegativeEdge()
     }
     return false;
 }
-
+/*
 /// find the path from startVertexKey to endVertexKey with DFS (stack)
 std::vector<int> Graph::FindPathDfs(int startVertexKey, int endVertexKey)
 {
@@ -231,7 +231,7 @@ std::vector<int> Graph::FindPathDfs(int startVertexKey, int endVertexKey)
         result.Pop();
     }
     return path;
-}
+}*/
 
 /// find the shortest path from startVertexKey to endVertexKey with Dijkstra using std::set
 //std::vector<int> Graph::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVertexKey) {}
