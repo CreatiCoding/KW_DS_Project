@@ -211,6 +211,7 @@ std::vector<int> Graph::FindPathDfs(int startVertexKey, int endVertexKey)
                 {
                     for (int j = i; j < vv->Size(); j++)
                     {
+                        cout << "i " << i << " j " << j << endl;
                         if (list[i]->GetWeight() > list[j]->GetWeight())
                         {
                             Edge *temp = list[i];
