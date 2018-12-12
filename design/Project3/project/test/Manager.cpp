@@ -31,7 +31,7 @@ ASTAR 1 4
     std::ifstream fin;
     fin.open("command.txt", std::ifstream::in);
     fin >> line;
-    cout << line;
+    cout << line == "LOAD";
 
     //    Load("mapdata.txt");
     //    FindPathDfs(0, 3);
