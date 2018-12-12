@@ -21,6 +21,7 @@ void Manager::Run(const char *filepath)
 
     Load("mapdata.txt");
     FindPathDfs(1, 4);
+    FindShortestPathDijkstraUsingSet(1, 4);
     m_graph.Print(fout);
 }
 void Manager::PrintError(Result result)
@@ -172,10 +173,60 @@ Result Manager::FindPathDfs(int startVertexKey, int endVertexKey)
 /// Result::InvalidVertexKey or Result::GraphNotExist or Result::InvalidAlgorithm if an exception has occurred.
 /// Result::Success otherwise.
 /// </returns>
-//Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVertexKey)
-//{
-//    // TODO: implement
-//}
+Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVertexKey)
+{
+    vector<int> path = m_graph.FindShortestPathDijkstraUsingSet(startVertexKey, endVertexKey);
+    int *arr = new int[path.size()];
+    int length = 0;
+
+    fout << "===== DFS =====" << endl;
+    fout << "shortest path: ";
+    for (int i = 0; i < path.size(); i++)
+    {
+        fout << path.at(i) << " ";
+        arr[i] = path.at(i);
+        if (i != path.size() - 1)
+        {
+            Vertex *v = m_graph.FindVertex(path.at(i));
+            Edge *e = v->GetHeadOfEdge();
+            while (e != NULL)
+            {
+                if (e->GetKey() == path.at(i + 1))
+                {
+                    length += e->GetWeight();
+                    break;
+                }
+                else
+                {
+                    e = e->GetNext();
+                }
+            }
+        }
+    }
+    fout << endl;
+
+    // 정렬
+    for (int i = 0; i < path.size(); i++)
+        for (int j = i; j < path.size(); j++)
+            if (arr[i] > arr[j])
+            {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+    fout << "sorted nodes: ";
+    for (int i = 0; i < path.size(); i++)
+    {
+        fout << arr[i] << " ";
+    }
+    fout << endl;
+    fout << "path length: " << length << endl;
+
+    fout << "===============" << endl;
+    return Result::Success;
+
+    // TODO: implement
+}
 /// <summary>
 /// find the shortest path from startVertexKey to endVertexKey with Dijkstra using MinHeap
 /// </summary>

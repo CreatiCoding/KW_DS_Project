@@ -51,7 +51,7 @@ public:
   std::vector<int> FindPathDfs(int startVertexKey, int endVertexKey);
 
   /// find the shortest path from startVertexKey to endVertexKey with Dijkstra using std::set
-  //std::vector<int> FindShortestPathDijkstraUsingSet(int startVertexKey, int endVertexKey);
+  std::vector<int> FindShortestPathDijkstraUsingSet(int startVertexKey, int endVertexKey);
 
   /// find the shortest path from startVertexKey to endVertexKey with Dijkstra using MinHeap
   //std::vector<int> FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int endVertexKey);
