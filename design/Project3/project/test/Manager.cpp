@@ -16,51 +16,66 @@ void Manager::Run(const char *filepath)
 {
     fout.open(RESULT_LOG_PATH);
     ferr.open(ERROR_LOG_PATH);
-    /*
-    LOAD mapdata.txt
-PRINT
-DFS 0 3
-DIJKSTRA 0 3
-DFS 1 4
-BELLMANFORD 1 4
-DIJKSTRA -1 10
-BELLMANFORD
-ASTAR 1 4
-    */
+
     string line;
     std::ifstream fin;
-    fin.open("command.txt", std::ifstream::in);
+    fin.open(filepath, std::ifstream::in);
     while (!fin.eof())
     {
         fin >> line;
 
         if (line.compare("LOAD") == 0)
         {
-            cout << "load" << endl;
+            fin >> line;
+            int result = Load(line.c_str());
+            if (result == Result::LoadFileNotExist)
+            {
+                fout << "===================" << endl;
+                PrintError(Result::LoadFileNotExist);
+                fout << "===================" << endl;
+            }
         }
         else if (line.compare("PRINT") == 0)
         {
-            cout << "PRINT" << endl;
+            fout << "====== PRINT ======" << endl;
+            int result = Print();
+            fout << "===================" << endl;
         }
         else if (line.compare("DFS") == 0)
         {
-            cout << "DFS" << endl;
+            int start, end;
+            fin >> start >> end;
+            int result = FindPathDfs(start, end);
         }
         else if (line.compare("DIJKSTRA") == 0)
         {
-            cout << "DIJKSTRA" << endl;
+            int start, end;
+            fin >> start >> end;
+            int result = FindShortestPathDijkstraUsingSet(start, end);
         }
         else if (line.compare("DIJKSTRAMIN") == 0)
         {
-            cout << "DIJKSTRAMIN" << endl;
+            int start, end;
+            fin >> start >> end;
+            int result = FindShortestPathDijkstraUsingSet(start, end);
         }
         else if (line.compare("BELLMANFORD") == 0)
         {
-            cout << "BELLMANFORD" << endl;
+            fout << "===================" << endl;
+            PrintError(Result::NonDefinedCommand);
+            fout << "===================" << endl;
         }
         else if (line.compare("FLOYD") == 0)
         {
-            cout << "FLOYD" << endl;
+            fout << "===================" << endl;
+            PrintError(Result::NonDefinedCommand);
+            fout << "===================" << endl;
+        }
+        else
+        {
+            fout << "===================" << endl;
+            PrintError(Result::NonDefinedCommand);
+            fout << "===================" << endl;
         }
     }
 
@@ -79,6 +94,10 @@ Result Manager::Load(const char *filepath)
 {
     std::ifstream fin;
     fin.open(filepath, std::ifstream::in);
+    if (!fin.is_open())
+    {
+        return Result::LoadFileNotExist;
+    }
     int size = 0;
     fin >> size;
     int **data = new int *[size];
@@ -113,6 +132,7 @@ Result Manager::Load(const char *filepath)
 
 Result Manager::Print()
 {
+    m_graph.Print(fout);
     return Result::Success;
 }
 Result Manager::FindPathDfs(int startVertexKey, int endVertexKey)

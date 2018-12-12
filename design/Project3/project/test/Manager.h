@@ -12,7 +12,7 @@ private:
   // the filepath for the result log
   const char *RESULT_LOG_PATH = "log.txt";
   // the filepath for the error log
-  const char *ERROR_LOG_PATH = "error.txt";
+  const char *ERROR_LOG_PATH = "log.txt";
 
   // the file stream for the result log
   std::ofstream fout;
