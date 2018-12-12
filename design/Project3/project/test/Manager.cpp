@@ -30,10 +30,39 @@ ASTAR 1 4
     string line;
     std::ifstream fin;
     fin.open("command.txt", std::ifstream::in);
+    while (!fin.eof())
+    {
+        fin >> line;
 
-    fin >> line;
-    cout << fin.eof() << endl;
-    // if (line.compare("LOAD"))
+        if (line.compare("LOAD"))
+        {
+            cout << "load" << endl;
+        }
+        else if (line.compare("PRINT"))
+        {
+            cout << "PRINT" << endl;
+        }
+        else if (line.compare("DFS"))
+        {
+            cout << "DFS" << endl;
+        }
+        else if (line.compare("DIJKSTRA"))
+        {
+            cout << "DIJKSTRA" << endl;
+        }
+        else if (line.compare("DIJKSTRAMIN"))
+        {
+            cout << "DIJKSTRAMIN" << endl;
+        }
+        else if (line.compare("BELLMANFORD"))
+        {
+            cout << "BELLMANFORD" << endl;
+        }
+        else if (line.compare("FLOYD"))
+        {
+            cout << "FLOYD" << endl;
+        }
+    }
 
     //    Load("mapdata.txt");
     //    FindPathDfs(0, 3);
