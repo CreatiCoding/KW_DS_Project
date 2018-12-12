@@ -71,10 +71,6 @@ void Manager::Run(const char *filepath)
         }
     }
 
-    //    Load("mapdata.txt");
-    //    FindPathDfs(0, 3);
-    //    FindShortestPathDijkstraUsingSet(0, 3);
-    //    m_graph.Print(fout);
     fin.close();
 }
 void Manager::PrintError(Result result)

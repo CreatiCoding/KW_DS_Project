@@ -227,7 +227,6 @@ std::vector<int> Graph::FindShortestPathDijkstraUsingSet(int startVertexKey, int
 
     while (!sets.empty())
     {
-        cout << "1" << endl;
         // 세트에서 꺼내온 Vertex 와 Edge
         pair<int, int> curr = *(sets.begin());
         sets.erase(sets.begin());
@@ -246,7 +245,6 @@ std::vector<int> Graph::FindShortestPathDijkstraUsingSet(int startVertexKey, int
         connectedEdge = connectedEdge->GetNext();
         while (connectedEdge != NULL)
         {
-            cout << "2" << endl;
             if (min > connectedEdge->GetWeight())
             {
                 min_idx = connectedEdge->GetKey();
