@@ -185,7 +185,7 @@ Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVert
     {
         fout << path.at(i) << " ";
         arr[i] = path.at(i);
-        if (i != path.size() - 1)
+        if (i != path.size() - 1 && path.at(i) != IN_FINITY)
         {
             Vertex *v = m_graph.FindVertex(path.at(i));
             Edge *e = v->GetHeadOfEdge();
