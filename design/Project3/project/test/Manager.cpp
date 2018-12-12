@@ -65,10 +65,6 @@ void Manager::Run(const char *filepath)
         {
             PrintError(Result::NonDefinedCommand);
         }
-        else
-        {
-            PrintError(Result::NonDefinedCommand);
-        }
     }
 
     fin.close();
@@ -100,7 +96,6 @@ Result Manager::Load(const char *filepath)
             fin >> data[i][j];
         }
     }
-    cout << "input is complete. size: " << size << endl;
     for (int i = 0; i < size; i++)
     {
         m_graph.AddVertex(i);
@@ -192,7 +187,6 @@ Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVert
         arr[i] = path.at(i);
         if (i != path.size() - 1 && path.at(i) != IN_FINITY)
         {
-            cout << path.at(i) << endl;
             Vertex *v = m_graph.FindVertex(path.at(i));
             Edge *e = v->GetHeadOfEdge();
             while (e != NULL)
