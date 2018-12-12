@@ -32,7 +32,7 @@ ASTAR 1 4
     fin.open("command.txt", std::ifstream::in);
 
     fin >> line;
-    cout << line << endl;
+    cout << fin.eof() << endl;
     // if (line.compare("LOAD"))
 
     //    Load("mapdata.txt");
