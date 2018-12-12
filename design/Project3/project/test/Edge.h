@@ -2,28 +2,28 @@
 #define EDGE_H
 
 #ifndef NULL
-#define NULL	0
+#define NULL 0
 #endif
 
 class Edge
 {
-private:
+  private:
     // the key of this edge
     int m_key;
     // the weight of this edge
     int m_weight;
     // the next pointer for the linked list of the edges
-    Edge* m_pNext;
+    Edge *m_pNext;
 
-public:
-	/// constructor
+  public:
+    /// constructor
     Edge();
 
-	/// copy constructor
+    /// copy constructor
     Edge(int key, int weight);
 
     /// set the next pointer of this edge
-    void SetNext(Edge* pNext);
+    void SetNext(Edge *pNext);
 
     /// get the key of this edge
     int GetKey() const;
@@ -32,7 +32,7 @@ public:
     int GetWeight() const;
 
     /// get the next pointer of this edge
-    Edge* GetNext() const;
+    Edge *GetNext() const;
 };
 
 #endif

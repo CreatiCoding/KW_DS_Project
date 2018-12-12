@@ -54,12 +54,12 @@ public:
   std::vector<int> FindShortestPathDijkstraUsingSet(int startVertexKey, int endVertexKey);
 
   /// find the shortest path from startVertexKey to endVertexKey with Dijkstra using MinHeap
-  //std::vector<int> FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int endVertexKey);
+  std::vector<int> FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int endVertexKey);
 
   /// find the shortest path from startVertexKey to endVertexKey with Bellman-Ford
-  //std::vector<int> FindShortestPathBellmanFord(int startVertexKey, int endVertexKey);
+  std::vector<int> FindShortestPathBellmanFord(int startVertexKey, int endVertexKey);
 
-  //std::vector<vector<int> > FindShortestPathFloyd();
+  std::vector<vector<int>> FindShortestPathFloyd();
 };
 
 #endif

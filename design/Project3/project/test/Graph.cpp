@@ -10,7 +10,6 @@ Graph::Graph()
 }
 Graph::~Graph()
 {
-    // TODO: implement
     Clear();
 }
 
@@ -333,9 +332,18 @@ std::vector<int> Graph::FindShortestPathDijkstraUsingSet(int startVertexKey, int
 }
 
 /// find the shortest path from startVertexKey to endVertexKey with Dijkstra using MinHeap
-//std::vector<int> Graph::FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int endVertexKey) {}
+std::vector<int> Graph::FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int endVertexKey)
+{
+    return NULL;
+}
 
 /// find the shortest path from startVertexKey to endVertexKey with Bellman-Ford
-//std::vector<int> Graph::FindShortestPathBellmanFord(int startVertexKey, int endVertexKey) {}
+std::vector<int> Graph::FindShortestPathBellmanFord(int startVertexKey, int endVertexKey)
+{
+    return NULL;
+}
 
-//std::vector<vector<int>> Graph::FindShortestPathFloyd() {}
+std::vector<vector<int>> Graph::FindShortestPathFloyd()
+{
+    return NULL;
+}
