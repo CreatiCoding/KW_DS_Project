@@ -177,18 +177,17 @@ std::vector<int> Graph::FindPathDfs(int startVertexKey, int endVertexKey)
     for (int i = 0; i < m_vSize; i++)
         visit[i] = false;
 
-    Stack<Vertex *> stack;
-    Stack<Vertex *> result;
+    Stack<int> stack;
+    Stack<int> result;
     vector<int> path;
-    Vertex *v = FindVertex(startVertexKey);
-    stack.Push(v);
-    result.Push(v);
+    stack.Push(startVertexKey);
+    result.Push(startVertexKey);
 
     visit[startVertexKey] = true;
 
     while (!stack.IsEmpty())
     {
-        Vertex *vv = stack.Top();
+        Vertex *vv = FindVertex(stack.Top());
         stack.Pop();
         bool flag = false;
         Edge *e = vv->GetHeadOfEdge();
@@ -215,8 +214,8 @@ std::vector<int> Graph::FindPathDfs(int startVertexKey, int endVertexKey)
                     result.Pop();
                     break;
                 }
-                stack.Push(vvv);
-                result.Push(vvv);
+                stack.Push(vvv->GetKey());
+                result.Push(vvv->GetKey());
                 visit[e->GetKey()] = true;
                 flag = true;
             }
@@ -228,7 +227,7 @@ std::vector<int> Graph::FindPathDfs(int startVertexKey, int endVertexKey)
     }
     while (!result.IsEmpty())
     {
-        path.push_back(result.Top()->GetKey());
+        path.push_back(result.Top());
         result.Pop();
     }
     return path;
