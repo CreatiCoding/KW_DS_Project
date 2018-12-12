@@ -22,11 +22,12 @@ void Manager::Run(const char *filepath)
     /**
      * test Code 
      */
-    //Load("mapdata.txt");
+    Load("mapdata.txt");
+    FindPathDfs(1, 4);
     //m_graph.Print(fout);
-    Stack<int> s;
-    s.Push(1);
-    cout << s.Top() << endl;
+    //Stack<int> s;
+    //s.Push(1);
+    //cout << s.Top() << endl;
 }
 void Manager::PrintError(Result result)
 {
@@ -112,12 +113,12 @@ Result Manager::Print()
 Result Manager::FindPathDfs(int startVertexKey, int endVertexKey)
 {
     // TODO: implement
-    //vector<int> path = m_graph.FindPathDfs(startVertexKey, endVertexKey);
+    vector<int> path = m_graph.FindPathDfs(startVertexKey, endVertexKey);
 
-    //for (int i = 0; i < path.size(); i++)
-    //{
-    //    cout << path.at(i) << " " << endl;
-    //}
+    for (int i = 0; i < path.size(); i++)
+    {
+        cout << path.at(i) << " " << endl;
+    }
     return Result::Success;
 }
 /// <summary>

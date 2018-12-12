@@ -1,7 +1,9 @@
 #ifndef STACK_H
 #define STACK_H
 
+#ifndef NULL
 #define NULL 0
+#endif
 
 template <typename T>
 class Stack
@@ -17,42 +19,47 @@ private:
   };
 
 private:
-  // the head pointer of the stack
   StackNode *m_pTop;
 
 public:
-  Stack();
-  ~Stack();
+  Stack()
+  {
+    m_pTop = NULL;
+  }
+  ~Stack()
+  {
+    while (!IsEmpty())
+      Pop();
+  }
 
-  /// <summary>
-  /// push the data into this stack
-  /// </summary>
-  ///
-  /// <param name="data">
-  /// a data to push into this stack
-  /// </param>
-  void Push(T data);
-  /// <summary>
-  /// pop(remove) the last-in data from this stack
-  /// </summary>
-  void Pop();
-  /// <summary>
-  /// get the last-in data of this stack
-  /// </summary>
-  ///
-  /// <returns>
-  /// the last-in data of this stack
-  /// </returns>
-  T Top();
-  /// <summary>
-  /// check whether this stack is empty or not.
-  /// </summary>
-  ///
-  /// <returns>
-  /// true if this stack is empty.
-  /// false otherwise.
-  /// </returns>
-  bool IsEmpty();
+  void Push(T data)
+  {
+    if (IsEmpty())
+    {
+      m_pTop = new StackNode(data);
+    }
+    else
+    {
+      StackNode *newTop = new StackNode(data);
+      newTop->pNext = m_pTop;
+      m_pTop = newTop;
+    }
+  }
+  void Pop()
+  {
+
+    StackNode *delTop = m_pTop;
+    m_pTop = m_pTop->pNext;
+    delete delTop;
+  }
+  T Top()
+  {
+    return m_pTop->Data;
+  }
+  bool IsEmpty()
+  {
+    return m_pTop == NULL;
+  }
 };
 
 #endif
