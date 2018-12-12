@@ -1,28 +1,28 @@
-#ifndef STACK_H
-#define STACK_H
+#ifndef STACK_H_C
+#define STACK_H_C
 
 #ifndef NULL
-#define NULL    0
+#define NULL 0
 #endif
 
 template <typename T>
 class Stack
 {
-private:
+  private:
     class StackNode
     {
-    public:
+      public:
         T Data;
-        StackNode* pNext;
+        StackNode *pNext;
 
         StackNode(T data) : Data(data), pNext(NULL) {}
     };
 
-private:
+  private:
     // the head pointer of the stack
-    StackNode* m_pTop;
+    StackNode *m_pTop;
 
-public:
+  public:
     Stack();
     ~Stack();
 
@@ -41,7 +41,7 @@ public:
     /// <summary>
     /// get the last-in data of this stack
     /// </summary>
-    /// 
+    ///
     /// <returns>
     /// the last-in data of this stack
     /// </returns>

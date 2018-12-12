@@ -112,12 +112,12 @@ Result Manager::Print()
 Result Manager::FindPathDfs(int startVertexKey, int endVertexKey)
 {
     // TODO: implement
-    vector<int> path = m_graph.FindPathDfs(startVertexKey, endVertexKey);
+    //vector<int> path = m_graph.FindPathDfs(startVertexKey, endVertexKey);
 
-    for (int i = 0; i < path.size(); i++)
-    {
-        cout << path.at(i) << " " << endl;
-    }
+    //for (int i = 0; i < path.size(); i++)
+    //{
+    //    cout << path.at(i) << " " << endl;
+    //}
     return Result::Success;
 }
 /// <summary>
