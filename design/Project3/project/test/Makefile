@@ -1,4 +1,4 @@
-SURC = Edge.cpp Vertex.cpp Graph.cpp Stack.cpp MinHeap.cpp Manager.cpp main.cpp
+SURC = *.cpp *.h
 EXEC = run
 CC = g++
 FLAG = -std=c++11 -g

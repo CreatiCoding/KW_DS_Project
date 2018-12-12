@@ -5,6 +5,7 @@
 #include "Result.h"
 #include "Graph.h"
 #include <fstream>
+#include "Stack.h"
 
 class Manager
 {
