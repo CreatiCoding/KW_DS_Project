@@ -30,9 +30,7 @@ void Manager::Run(const char *filepath)
             int result = Load(line.c_str());
             if (result == Result::LoadFileNotExist)
             {
-                fout << "===================" << endl;
                 PrintError(Result::LoadFileNotExist);
-                fout << "===================" << endl;
             }
         }
         else if (line.compare("PRINT") == 0)
@@ -61,21 +59,15 @@ void Manager::Run(const char *filepath)
         }
         else if (line.compare("BELLMANFORD") == 0)
         {
-            fout << "===================" << endl;
             PrintError(Result::NonDefinedCommand);
-            fout << "===================" << endl;
         }
         else if (line.compare("FLOYD") == 0)
         {
-            fout << "===================" << endl;
             PrintError(Result::NonDefinedCommand);
-            fout << "===================" << endl;
         }
         else
         {
-            fout << "===================" << endl;
             PrintError(Result::NonDefinedCommand);
-            fout << "===================" << endl;
         }
     }
 
@@ -87,7 +79,9 @@ void Manager::Run(const char *filepath)
 }
 void Manager::PrintError(Result result)
 {
+    ferr << "===================" << endl;
     ferr << "Error code: " << result << std::endl;
+    ferr << "===================" << endl;
 }
 
 Result Manager::Load(const char *filepath)
