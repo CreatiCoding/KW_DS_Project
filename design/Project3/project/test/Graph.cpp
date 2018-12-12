@@ -174,7 +174,7 @@ bool Graph::IsNegativeEdge()
 std::vector<int> Graph::FindPathDfs(int startVertexKey, int endVertexKey)
 {
     bool *visit = new bool[m_vSize];
-    memset(visit, false, m_vSize);
+    memset(visit, false, sizeof(bool) * m_vSize);
 
     Stack<Vertex *> stack;
     Stack<Vertex *> result;
