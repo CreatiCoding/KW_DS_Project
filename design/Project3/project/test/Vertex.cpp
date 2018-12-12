@@ -1,12 +1,5 @@
 #include "Vertex.h"
 #include <iostream>
-/**
-     *  int m_key;
-     *  int m_size;
-     *  Edge* m_pEHead;
-     *  Vertex* m_pNext;
-    */
-
 Vertex::Vertex()
 {
     m_key = -1;
@@ -120,7 +113,6 @@ Edge *Vertex::GetHeadOfEdge() const
 {
     return m_pEHead;
 }
-/// memory free for edges
 void Vertex::Clear()
 {
     Edge *curr = m_pEHead;

@@ -16,11 +16,27 @@ void Manager::Run(const char *filepath)
 {
     fout.open(RESULT_LOG_PATH);
     ferr.open(ERROR_LOG_PATH);
+    /*
+    LOAD mapdata.txt
+PRINT
+DFS 0 3
+DIJKSTRA 0 3
+DFS 1 4
+BELLMANFORD 1 4
+DIJKSTRA -1 10
+BELLMANFORD
+ASTAR 1 4
+    */
+    string line;
+    std::ifstream fin;
+    fin.open("command.txt", std::ifstream::in);
+    fin >> line;
+    cout << line;
 
-    Load("mapdata.txt");
-    FindPathDfs(0, 3);
-    FindShortestPathDijkstraUsingSet(0, 3);
-    m_graph.Print(fout);
+    //    Load("mapdata.txt");
+    //    FindPathDfs(0, 3);
+    //    FindShortestPathDijkstraUsingSet(0, 3);
+    //    m_graph.Print(fout);
 }
 void Manager::PrintError(Result result)
 {
@@ -61,29 +77,12 @@ Result Manager::Load(const char *filepath)
     delete[] data;
     fin.close();
     return Result::Success;
-    // TODO: implement
 }
 
 Result Manager::Print()
 {
-    // TODO: implement
     return Result::Success;
 }
-/// <summary>
-/// find the path from startVertexKey to endVertexKey with DFS (stack)
-/// </summary>
-///
-/// <param name="startVertexKey">
-/// the start vertex key
-/// </param>
-/// <param name="endVertexKey">
-/// the end vertex key
-/// </param>
-///
-/// <returns>
-/// Result::InvalidVertexKey or Result::GraphNotExist or Result::InvalidAlgorithm if an exception has occurred.
-/// Result::Success otherwise.
-/// </returns>
 Result Manager::FindPathDfs(int startVertexKey, int endVertexKey)
 {
 
@@ -116,7 +115,6 @@ Result Manager::FindPathDfs(int startVertexKey, int endVertexKey)
         }
     }
     fout << endl;
-
     // 정렬
     for (int i = 0; i < path.size(); i++)
         for (int j = i; j < path.size(); j++)
@@ -137,21 +135,6 @@ Result Manager::FindPathDfs(int startVertexKey, int endVertexKey)
     fout << "===============" << endl;
     return Result::Success;
 }
-/// <summary>
-/// find the shortest path from startVertexKey to endVertexKey with Dijkstra using std::set
-/// </summary>
-///
-/// <param name="startVertexKey">
-/// the start vertex key
-/// </param>
-/// <param name="endVertexKey">
-/// the end vertex key
-/// </param>
-///
-/// <returns>
-/// Result::InvalidVertexKey or Result::GraphNotExist or Result::InvalidAlgorithm if an exception has occurred.
-/// Result::Success otherwise.
-/// </returns>
 Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVertexKey)
 {
     vector<int> path = m_graph.FindShortestPathDijkstraUsingSet(startVertexKey, endVertexKey);
@@ -159,7 +142,7 @@ Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVert
     int *arr = new int[path.size()];
     int length = 0;
 
-    fout << "===== DFS =====" << endl;
+    fout << "===== DIJKSTRA =====" << endl;
     fout << "shortest path: ";
     for (int i = 0; i < path.size(); i++)
     {
@@ -185,7 +168,6 @@ Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVert
         }
     }
     fout << endl;
-
     // 정렬
     for (int i = 0; i < path.size(); i++)
         for (int j = i; j < path.size(); j++)
@@ -205,24 +187,8 @@ Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVert
 
     fout << "===============" << endl;
     return Result::Success;
-
-    // TODO: implement
 }
-/// <summary>
-/// find the shortest path from startVertexKey to endVertexKey with Dijkstra using MinHeap
-/// </summary>
-///
-/// <param name="startVertexKey">
-/// the start vertex key
-/// </param>
-/// <param name="endVertexKey">
-/// the end vertex key
-/// </param>
-///
-/// <returns>
-/// Result::InvalidVertexKey or Result::GraphNotExist or Result::InvalidAlgorithm if an exception has occurred.
-/// Result::Success otherwise.
-/// </returns>
+
 //Result Manager::FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int endVertexKey)
 //{
 //    // TODO: implement

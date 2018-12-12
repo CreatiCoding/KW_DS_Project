@@ -208,72 +208,6 @@ std::vector<int> Graph::FindPathDfs(int startVertexKey, int endVertexKey)
                 stack.Push(currentEdge->GetKey());
             currentEdge = currentEdge->GetNext();
         }
-
-        // Vertex *vv = FindVertex(stack.Top());
-        // stack.Pop();
-        // bool flag = false;
-        // Edge *e = vv->GetHeadOfEdge();
-        // for (int i = 1; i <= m_vSize; i++)
-        // {
-        //     if (e == NULL || visit[e->GetKey()])
-        //     {
-        //         stack.Pop();
-        //         result.Pop();
-        //         break;
-        //     }
-        //     else
-        //     {
-        //         // e부터 스택에 넣는다.
-        //         while (e != NULL)
-        //         {
-        //             stack.Push(e->GetKey());
-        //         }
-
-        //         Edge **list = new Edge *[vv->Size()];
-        //         for (int i = 0; i < vv->Size(); i++)
-        //         {
-        //             list[i] = e;
-        //             e = e->GetNext();
-        //         }
-
-        //         for (int i = 0; i < vv->Size(); i++)
-        //         {
-        //             for (int j = i; j < vv->Size(); j++)
-        //             {
-        //                 if (list[i]->GetWeight() > list[j]->GetWeight())
-        //                 {
-        //                     Edge *temp = list[i];
-        //                     list[i] = list[j];
-        //                     list[j] = temp;
-        //                 }
-        //             }
-        //         }
-        //         int seq = 0;
-        //         e = list[seq];
-        //         while (visit[e->GetKey()])
-        //             e = list[++seq];
-        //         Vertex *vvv = FindVertex(e->GetKey());
-
-        //         if (vvv == NULL)
-        //         {
-        //             stack.Pop();
-        //             result.Pop();
-        //             break;
-        //         }
-        //         else
-        //         {
-        //             stack.Push(vvv->GetKey());
-        //             result.Push(vvv->GetKey());
-        //             visit[vvv->GetKey()] = true;
-        //             flag = true;
-        //             break;
-        //         }
-        //     }
-        // }
-        // if (!flag)
-        // {
-        //     stack.Pop();
-        // }
     }
     return result;
 }
@@ -330,7 +264,7 @@ std::vector<int> Graph::FindShortestPathDijkstraUsingSet(int startVertexKey, int
     }
     return path;
 }
-
+/*
 /// find the shortest path from startVertexKey to endVertexKey with Dijkstra using MinHeap
 std::vector<int> Graph::FindShortestPathDijkstraUsingMinHeap(int startVertexKey, int endVertexKey)
 {
@@ -347,3 +281,4 @@ std::vector<vector<int>> Graph::FindShortestPathFloyd()
 {
     throw std::exception("NOT IMPLEMENT");
 }
+*/

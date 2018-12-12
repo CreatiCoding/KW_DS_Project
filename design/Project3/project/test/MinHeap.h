@@ -25,11 +25,21 @@ public:
   /// <param name="value">
   /// the value that is managed in this heap
   /// </param>
-  void Push(TKey key, TValue value);
+  void Push(TKey key, TValue value)
+  {
+    m_vec.push_back(make_pair(key, value));
+    Heapify(m_vec.size() - 1);
+  }
   /// <summary>
   /// remove the minimum element
   /// </summary>
-  void Pop();
+  void Pop()
+  {
+    if (!IsEmpty())
+    {
+      m_vec.erase(m_vec.front());
+    }
+  }
   /// <summary>
   /// get the minimum element
   /// </summary>
@@ -37,7 +47,10 @@ public:
   /// <returns>
   /// the minimum element
   /// </returns>
-  std::pair<TKey, TValue> Top();
+  std::pair<TKey, TValue> Top()
+  {
+    return m_vec.front();
+  }
   /// <summary>
   /// get the key-value pair which the value is the same as the target
   /// </summary>
@@ -53,7 +66,10 @@ public:
   /// <returns>
   /// true if this heap is empty
   /// </returns>
-  bool IsEmpty();
+  bool IsEmpty()
+  {
+    return m_vec.size() == 0;
+  }
   /// <summary>
   /// change the key of the node which the value is the target.<para/>
   /// In general, the newKey should be smaller than the old key.<para/>
@@ -66,7 +82,14 @@ public:
   /// <param name="newKey">
   /// new key for the target
   /// </param>
-  void DecKey(TValue target, TKey newKey);
+  void DecKey(TValue target, TKey newKey)
+  {
+    std::pair<TKey, TValue> node = Get(target);
+    if (node.first != -1)
+    {
+      node.first = newKey;
+    }
+  }
 
   void Print(int index);
 
@@ -75,7 +98,16 @@ private:
   /// heap-sort, heapify.<para/>
   /// this function can be called recursively
   /// </summary>
-  void Heapify(int index);
+  void Heapify(int index)
+  {
+    if (index && m_vec.at((index - 1) / 2).second > m_vec.at(index).second)
+    {
+      std::pair<TKey, TValue> parent = m_vec.at((index - 1) / 2);
+      m_vec.assign((index - 1) / 2, m_vec.at(index));
+      m_vec.assign(index, parent);
+      Heapify((index - 1) / 2);
+    }
+  }
 };
 
 #endif
