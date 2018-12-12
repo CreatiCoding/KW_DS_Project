@@ -34,31 +34,31 @@ ASTAR 1 4
     {
         fin >> line;
 
-        if (line.compare("LOAD"))
+        if (line.compare("LOAD") == 0)
         {
             cout << "load" << endl;
         }
-        else if (line.compare("PRINT"))
+        else if (line.compare("PRINT") == 0)
         {
             cout << "PRINT" << endl;
         }
-        else if (line.compare("DFS"))
+        else if (line.compare("DFS") == 0)
         {
             cout << "DFS" << endl;
         }
-        else if (line.compare("DIJKSTRA"))
+        else if (line.compare("DIJKSTRA") == 0)
         {
             cout << "DIJKSTRA" << endl;
         }
-        else if (line.compare("DIJKSTRAMIN"))
+        else if (line.compare("DIJKSTRAMIN") == 0)
         {
             cout << "DIJKSTRAMIN" << endl;
         }
-        else if (line.compare("BELLMANFORD"))
+        else if (line.compare("BELLMANFORD") == 0)
         {
             cout << "BELLMANFORD" << endl;
         }
-        else if (line.compare("FLOYD"))
+        else if (line.compare("FLOYD") == 0)
         {
             cout << "FLOYD" << endl;
         }
