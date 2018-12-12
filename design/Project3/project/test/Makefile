@@ -1,4 +1,4 @@
-SURC = *.cpp
+SURC = *.cpp *.h
 EXEC = run
 CC = g++
 FLAG = -std=c++11 -g

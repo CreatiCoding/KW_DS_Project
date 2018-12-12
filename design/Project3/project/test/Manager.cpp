@@ -17,11 +17,9 @@ void Manager::Run(const char *filepath)
     fout.open(RESULT_LOG_PATH);
     ferr.open(ERROR_LOG_PATH);
 
-    // TODO: implement
-
     Load("mapdata.txt");
-    FindPathDfs(1, 4);
-    FindShortestPathDijkstraUsingSet(1, 4);
+    FindPathDfs(0, 3);
+    FindShortestPathDijkstraUsingSet(0, 3);
     m_graph.Print(fout);
 }
 void Manager::PrintError(Result result)
@@ -29,18 +27,6 @@ void Manager::PrintError(Result result)
     ferr << "Error code: " << result << std::endl;
 }
 
-/// <summary>
-/// make a graph
-/// </summary>
-///
-/// <param name="filepath">
-/// the filepath to read to make the graph
-/// </param>
-///
-/// <returns>
-/// Result::Success if load is successful.
-/// Result::LoadFileNotExist if file is not exist.
-/// </returns>
 Result Manager::Load(const char *filepath)
 {
     std::ifstream fin;
@@ -77,14 +63,7 @@ Result Manager::Load(const char *filepath)
     return Result::Success;
     // TODO: implement
 }
-/// <summary>
-/// print out the graph as matrix form
-/// </summary>
-///
-/// <returns>
-/// Result::Success if the printing is successful
-/// Result::GraphNotExist if there is no graph
-/// </returns>
+
 Result Manager::Print()
 {
     // TODO: implement
@@ -176,6 +155,7 @@ Result Manager::FindPathDfs(int startVertexKey, int endVertexKey)
 Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVertexKey)
 {
     vector<int> path = m_graph.FindShortestPathDijkstraUsingSet(startVertexKey, endVertexKey);
+
     int *arr = new int[path.size()];
     int length = 0;
 
@@ -187,6 +167,7 @@ Result Manager::FindShortestPathDijkstraUsingSet(int startVertexKey, int endVert
         arr[i] = path.at(i);
         if (i != path.size() - 1 && path.at(i) != IN_FINITY)
         {
+            cout << path.at(i) << endl;
             Vertex *v = m_graph.FindVertex(path.at(i));
             Edge *e = v->GetHeadOfEdge();
             while (e != NULL)

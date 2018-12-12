@@ -286,46 +286,50 @@ std::vector<int> Graph::FindShortestPathDijkstraUsingSet(int startVertexKey, int
     std::set<pair<int, int>> sets;
 
     // 반환값
-    vector<int> dist(m_vSize, IN_FINITY);
+    vector<int> path;
 
     // 초기화
     sets.insert(make_pair(startVertexKey, 0));
-    dist[startVertexKey] = 0;
+    path.push_back(startVertexKey);
 
     while (!sets.empty())
     {
-        // The first vertex in Set is the minimum distance
-        // vertex, extract it from set.
-        pair<int, int> tmp = *(sets.begin());
+        cout << "1" << endl;
+        // 세트에서 꺼내온 Vertex 와 Edge
+        pair<int, int> curr = *(sets.begin());
         sets.erase(sets.begin());
 
-        // vertex label is stored in second of pair (it
-        // has to be done this way to keep the vertices
-        // sorted distance (distance must be first item
-        // in pair)
-        int u_key = tmp.first;
-        Vertex *vertex = FindVertex(u_key);
+        int s_key = curr.first;
+        Vertex *vertex = FindVertex(s_key);
         if (vertex == NULL)
             continue;
         Edge *connectedEdge = vertex->GetHeadOfEdge();
-        // 'i' is used to get all adjacent vertices of a vertex
+        if (connectedEdge == NULL)
+            continue;
+
+        // 최소 거리 탐색
+        int min_idx = connectedEdge->GetKey();
+        int min = connectedEdge->GetWeight();
+        connectedEdge = connectedEdge->GetNext();
         while (connectedEdge != NULL)
         {
-            int v_key = connectedEdge->GetKey();
-            int weight = connectedEdge->GetWeight();
-            if (dist[v_key] > dist[u_key] + weight)
+            cout << "2" << endl;
+            if (min > connectedEdge->GetWeight())
             {
-                Vertex *target = FindVertex(v_key);
-                if (dist[v_key] != IN_FINITY)
-                    sets.erase(sets.find(make_pair(dist[v_key], v_key)));
-
-                dist[v_key] = dist[u_key] + weight;
-                sets.insert(make_pair(dist[v_key], v_key));
+                min_idx = connectedEdge->GetKey();
+                min = connectedEdge->GetWeight();
+            }
+            if (connectedEdge->GetKey() == endVertexKey)
+            {
+                path.push_back(connectedEdge->GetKey());
+                return path;
             }
             connectedEdge = connectedEdge->GetNext();
         }
+        path.push_back(min_idx);
+        sets.insert(make_pair(min_idx, min));
     }
-    return dist;
+    return path;
 }
 
 /// find the shortest path from startVertexKey to endVertexKey with Dijkstra using MinHeap
