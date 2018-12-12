@@ -20,11 +20,13 @@ private:
 
 private:
   StackNode *m_pTop;
+  int m_size;
 
 public:
   Stack()
   {
     m_pTop = NULL;
+    m_size = 0;
   }
   ~Stack()
   {
@@ -37,20 +39,24 @@ public:
     if (IsEmpty())
     {
       m_pTop = new StackNode(data);
+      m_size++;
     }
     else
     {
       StackNode *newTop = new StackNode(data);
       newTop->pNext = m_pTop;
       m_pTop = newTop;
+      m_size++;
     }
   }
   void Pop()
   {
-
+    if (m_pTop == NULL)
+      return;
     StackNode *delTop = m_pTop;
     m_pTop = m_pTop->pNext;
     delete delTop;
+    m_size--;
   }
   T Top()
   {
@@ -59,6 +65,10 @@ public:
   bool IsEmpty()
   {
     return m_pTop == NULL;
+  }
+  int Size()
+  {
+    return m_size;
   }
 };
 

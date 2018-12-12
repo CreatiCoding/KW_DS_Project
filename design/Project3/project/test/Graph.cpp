@@ -187,37 +187,61 @@ std::vector<int> Graph::FindPathDfs(int startVertexKey, int endVertexKey)
 
     while (!stack.IsEmpty())
     {
+        cout << "loop start " << stack.Top() << endl;
         Vertex *vv = FindVertex(stack.Top());
         stack.Pop();
         bool flag = false;
         Edge *e = vv->GetHeadOfEdge();
-
         for (int i = 1; i <= m_vSize; i++)
         {
-            if (e == NULL)
+            if (e == NULL || visit[e->GetKey()])
             {
                 stack.Pop();
                 result.Pop();
                 break;
             }
-            else if (visit[e->GetKey()])
-            {
-                e = e->GetNext();
-                continue;
-            }
             else
             {
+                int min = e->GetWeight();
+                int idx = 0;
+                Edge **list = new Edge *[vv->Size()];
+                list[0] = e;
+
+                for (int i = 0; i < vv->Size(); i++)
+                {
+                    for (int j = i; j < vv->Size(); j++)
+                    {
+                        if (list[i]->GetWeight() > list[j]->GetWeight())
+                        {
+                            Edge *temp = list[i];
+                            list[i] = list[j];
+                            list[j] = temp;
+                        }
+                    }
+                }
+                int seq = 0;
+                e = list[seq];
+                while (visit[e->GetKey()])
+                    e = list[++seq];
+                cout << "min: " << e->GetKey() << " " << e->GetWeight() << endl;
                 Vertex *vvv = FindVertex(e->GetKey());
+
                 if (vvv == NULL)
                 {
                     stack.Pop();
                     result.Pop();
                     break;
                 }
-                stack.Push(vvv->GetKey());
-                result.Push(vvv->GetKey());
-                visit[e->GetKey()] = true;
-                flag = true;
+                else
+                {
+                    cout << "stack push " << vvv->GetKey() << endl;
+                    stack.Push(vvv->GetKey());
+                    result.Push(vvv->GetKey());
+                    visit[vvv->GetKey()] = true;
+                    flag = true;
+                    cout << "stack length " << stack.Size() << !stack.IsEmpty() << endl;
+                    break;
+                }
             }
         }
         if (!flag)
