@@ -30,13 +30,16 @@ ASTAR 1 4
     string line;
     std::ifstream fin;
     fin.open("command.txt", std::ifstream::in);
+
     fin >> line;
-    cout << line.compare("LOAD") << endl;
+    cout << line << endl;
+    // if (line.compare("LOAD"))
 
     //    Load("mapdata.txt");
     //    FindPathDfs(0, 3);
     //    FindShortestPathDijkstraUsingSet(0, 3);
     //    m_graph.Print(fout);
+    fin.close();
 }
 void Manager::PrintError(Result result)
 {
