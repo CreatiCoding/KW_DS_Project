@@ -6,6 +6,8 @@
   position: fixed;
   top: 0px;
   width: 100%;
+  z-index: 99;
+  border-bottom: 20px solid rgb(100, 100, 100);
 }
 .app-logo {
   animation: App-logo-spin infinite 20s linear;
