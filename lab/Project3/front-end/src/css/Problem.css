@@ -1,0 +1,65 @@
+.problem-wrapper {
+  display: inline;
+}
+.problem-title {
+  font-size: 42px;
+  text-align: left;
+  margin: 20px;
+}
+.problem-header {
+  display: inline-block;
+  width: 100%;
+  border: 1px solid;
+  margin: 0 -1px 0 -1px;
+  height: 30px;
+}
+.problem-header div {
+  display: inline-block;
+}
+.problem-right div {
+  border-right: 1px solid;
+  height: 100%;
+}
+.problem-left {
+  padding-left: 20px;
+  float: left;
+  height: 30px;
+}
+.problem-right {
+  height: 30px;
+  float: right;
+}
+.problem-right-difficulty {
+  border-left: solid 1px !important;
+  width: 200px;
+}
+.problem-right-accepted {
+  width: 150px;
+}
+.problem-right-like {
+  width: 100px;
+}
+.problem-right-hate {
+  width: 100px;
+}
+.problem-right-wish {
+  width: 50px;
+}
+.problem-right-share {
+  width: 50px;
+  border-right: 0px !important;
+}
+.header-text {
+  font-size: 25px;
+}
+.header-sign {
+  font-size: 21px;
+}
+.problem-contents {
+  border: solid 1px;
+  padding: 20px;
+  text-align: initial;
+}
+
+.problem-contents-inner {
+}

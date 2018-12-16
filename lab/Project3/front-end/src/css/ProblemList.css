@@ -22,8 +22,8 @@
   display: inline-block;
 }
 .problem-column-default {
-  border: solid 1px white;
-  background: rgba(128, 128, 128, 0.5);
+  border: solid 1px black;
+  background: white;
 }
 .problem-column-header {
   height: 30px;

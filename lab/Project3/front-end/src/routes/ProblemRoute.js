@@ -1,12 +1,11 @@
 import React from "react";
 
+import ProblemContainer from "../containers/ProblemContainer";
 const ProblemRoute = ({ match }) => {
-  let contents = {
-    fontSize: "large"
-  };
   return (
-    <div style={contents}>
-      Welcome to about ProblemRoute!! <br /> {match.params.idx}
+    <div>
+      <br />
+      <ProblemContainer />
     </div>
   );
 };
