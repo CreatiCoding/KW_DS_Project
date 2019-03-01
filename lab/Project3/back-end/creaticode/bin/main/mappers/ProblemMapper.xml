@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper
+	namespace="co.kr.creaticoding.creaticode.mapper.UserMapper">
+
+
+	<insert id="write">
+		insert into problem ( problem_title, difficulty,
+		like_count, hate_count,
+		contents, accepted_count, submitted_count,
+		writer_id, create_at)
+		values ( #{problem_title}, #{difficulty},
+		#{like_count}, #{hate_count}, #{contents}, #{accepted_count},
+		#{submitted_count}, #{writer_id}, #{create_at} );
+	</insert>
+
+</mapper>
+
+

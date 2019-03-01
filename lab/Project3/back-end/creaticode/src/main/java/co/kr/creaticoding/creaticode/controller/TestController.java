@@ -12,13 +12,7 @@ public class TestController {
 
 	@Autowired
 	private UserMapper userMapper;
-
-	// @ResponseBody
-	@RequestMapping("/")
-	public String test() {
-		return "Hello World! Spring Project";
-	}
-
+	
 	// @ResponseBody
 	@RequestMapping("/user/count")
 	public String userCount() throws Exception {

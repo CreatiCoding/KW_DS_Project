@@ -31,22 +31,22 @@
 }
 .problem-right-difficulty {
   border-left: solid 1px !important;
-  width: 200px;
+  max-width: 200px;
 }
 .problem-right-accepted {
-  width: 150px;
+  max-width: 150px;
 }
 .problem-right-like {
-  width: 100px;
+  max-width: 100px;
 }
 .problem-right-hate {
-  width: 100px;
+  max-width: 100px;
 }
 .problem-right-wish {
-  width: 50px;
+  max-width: 50px;
 }
 .problem-right-share {
-  width: 50px;
+  max-width: 50px;
   border-right: 0px !important;
 }
 .header-text {
@@ -62,4 +62,15 @@
 }
 
 .problem-contents-inner {
+}
+
+.problem-title {
+}
+.problem-title-right {
+  display: inline-block;
+  float: right;
+}
+.problem-title-left {
+  display: inline-block;
+  float: left;
 }

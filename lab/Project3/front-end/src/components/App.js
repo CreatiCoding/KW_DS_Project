@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import "../App.css";
 import AppHeader from "./AppHeader";
-import AppWrapper from "./AppWapper";
+import AppWrapper from "./AppWrapper";
 import AppFooter from "./AppFooter";
 import Filter from "../containers/Filter";
 

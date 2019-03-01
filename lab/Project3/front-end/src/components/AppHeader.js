@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 
 import "../css/AppHeader.css";
 
+var hide = {
+  display: "none"
+};
+var show = {
+  display: "inline-block"
+};
 const AppHeader = ({ match }) => {
   return (
     <header className="app-header">
@@ -25,11 +31,41 @@ const AppHeader = ({ match }) => {
         <div className="app-header-block">
           <Link to="/rank/list">순위</Link>
         </div>
-        <div className="app-header-block">
-          <Link to="/login">Login</Link>
+        <div
+          className="app-header-block"
+          id="name"
+          style={localStorage.getItem("name") == null ? hide : show}
+        >
+          <Link to="/profile">
+            {localStorage.getItem("name") == null
+              ? ""
+              : localStorage.getItem("name")}
+          </Link>
         </div>
-        <div className="app-header-block">
+        <div
+          className="app-header-block"
+          style={localStorage.getItem("name") == null ? show : hide}
+        >
+          <a href="/googleLogin">Login</a>
+        </div>
+        <div
+          className="app-header-block"
+          style={localStorage.getItem("name") == null ? show : hide}
+        >
           <Link to="/join">Join</Link>
+        </div>
+        <div
+          className="app-header-block"
+          style={localStorage.getItem("name") == null ? hide : show}
+        >
+          <a
+            href="#"
+            onClick={() => {
+              localStorage.clear();
+            }}
+          >
+            Logout
+          </a>
         </div>
       </div>
     </header>

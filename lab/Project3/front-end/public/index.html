@@ -38,4 +38,20 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script>
+    if (
+      window.location.search.split("?")[1] != undefined &&
+      window.location.search.split("?")[1].indexOf("name") != -1
+    ) {
+      localStorage.setItem(
+        "name",
+        window.location.search
+          .split("?")[1]
+          .split("&")[0]
+          .split("=")[1]
+          .replace("+", " ")
+      );
+      window.location = "/";
+    }
+  </script>
 </html>

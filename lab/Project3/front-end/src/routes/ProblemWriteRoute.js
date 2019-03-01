@@ -1,11 +1,13 @@
 import React from "react";
+import ProblemWriteContainer from "../containers/ProblemWriteContainer";
 
 //console.log(match.params.toon_info_idx);
 const ProblemWriteRoute = ({ match }) => {
-  let contents = {
-    fontSize: "large"
-  };
-  return <div style={contents}>Welcome to about ProblemWriteRoute!!</div>;
+  return (
+    <div>
+      <ProblemWriteContainer />
+    </div>
+  );
 };
 
 export default ProblemWriteRoute;

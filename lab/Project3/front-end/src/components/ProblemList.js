@@ -61,6 +61,15 @@ const ProblemList = ({ enterProblem, list }) => {
       submit: 109,
       writer: "creco",
       share: "/problem/3"
+    },
+    {
+      idx: 4,
+      title: "안녕 세상아!",
+      difficulty: "easy",
+      accepted: 0,
+      submit: 0,
+      writer: "SeokHo Jeong",
+      share: "/problem/4"
     }
   ];
   return (
